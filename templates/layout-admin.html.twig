@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Tudo Imóveis</title>
+
+        <link href="{{ asset('css/css.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/nifty.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/pace.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/themify-icons.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+
+    </head>
+
+    <body class="pace-done">
+
+        <div
+            id="container" class="effect aside-float aside-bright mainnav-lg">
+
+            <!--NAVBAR-->
+            <header id="navbar">
+                <div
+                    id="navbar-container" class="boxed">
+
+                    <!--Brand logo & name-->
+                    <div class="navbar-header">
+                        <a href="#" class="navbar-brand">
+                            <img src="{{ asset('images/logo.png') }}" class="brand-icon">
+                            <div class="brand-title">
+                                <span class="brand-text">Tudo Imóveis</span>
+                            </div>
+                        </a>
+                    </div>
+                    <!--End brand logo & name-->
+
+
+                    <!--Navbar Dropdown-->
+                    <div class="navbar-content">
+
+                        <ul
+                            class="nav navbar-top-links">
+
+                            <!--Notification dropdown-->
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                                    <i class="ti-bell"></i>
+                                    <span class="badge badge-header badge-danger"></span>
+                                </a>
+
+                                <!--Notification dropdown menu-->
+                                <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
+                                    <div class="nano scrollable has-scrollbar" style="height: 0px;">
+                                        <div class="nano-content" tabindex="0" style="right: -17px;">
+                                            <ul class="head-list">
+                                                <li>
+                                                    <a href="#" class="media add-tooltip" data-title="Used space : 95%" data-container="body" data-placement="bottom" data-original-title="" title="">
+                                                        <div class="media-left">
+                                                            <i class="ti-harddrive icon-2x text-main"></i>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <p class="text-nowrap text-main text-semibold">HDD is full</p>
+                                                            <div class="progress progress-sm mar-no">
+                                                                <div style="width: 95%;" class="progress-bar progress-bar-danger">
+                                                                    <span class="sr-only">95% Complete</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="nano-pane" style="display: none;">
+                                            <div class="nano-slider" style="height: 20px; transform: translate(0px);"></div>
+                                        </div>
+                                    </div>
+
+                                    <!--Dropdown footer-->
+                                    <div class="pad-all bord-top">
+                                        <a href="#" class="btn-link text-main box-block">
+                                            <i class="pci-chevron chevron-right pull-right"></i>Show All Notifications
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--End notifications dropdown-->
+
+
+                            <!--User dropdown-->
+                            <li id="dropdown-user" class="dropdown">
+                                <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
+                                    <i class="ti-user"></i>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right panel-default">
+                                    <ul class="head-list">
+                                        <li>
+                                            <a href="#">
+                                                <i class="ti-user icon-lg icon-fw"></i>
+                                                Profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="ti-settings icon-lg icon-fw"></i>
+                                                Settings</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('app_logout') }}">
+                                                <i class="ti-unlock icon-lg icon-fw"></i>
+                                                Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <!--End user dropdown-->
+                        </ul>
+                    </div>
+                    <!--End Navbar Dropdown-->
+
+                </div>
+            </header>
+            <!--END NAVBAR-->
+
+            <div
+                class="boxed">
+
+                <!--CONTENT CONTAINER-->
+                <div id="content-container">
+
+                    <div id="page-head">
+                    {% block pagehead %}
+                        <div id="page-title">
+                            <h1 class="page-header text-overflow">{% block title %}{% endblock %}</h1>
+                        </div>
+                    {% endblock %}
+                    </div>
+
+                    <!--Page content-->
+                    <div id="page-content">
+                        <div class="panel">
+
+                            <div class="panel-body">
+
+                                {% block body %}
+                                    <h4 class="pad-top">Título</h4>
+                                    <hr>
+                                    <div class="">
+                                        Imagine aqui um monte de texto bonito
+                                    </div>
+                                {% endblock %}
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--End page content-->
+
+                </div>
+                <!--END CONTENT CONTAINER-->
+
+                <!--MAIN NAVIGATION-->
+                <nav id="mainnav-container">
+                    <div
+                        id="mainnav">
+
+                        <!--Menu-->
+                        <div id="mainnav-menu-wrap">
+                            <div class="nano has-scrollbar">
+                                <div
+                                    class="nano-content" tabindex="0" style="right: -17px;">
+
+                                    <!--Profile Widget-->
+                                    <div id="mainnav-profile" class="mainnav-profile">
+                                        <div class="profile-wrap text-center">
+                                            <div class="pad-btm">
+                                                <img class="img-circle img-md" src="{{ asset('images/1.png') }}" alt="Profile Picture">
+                                            </div>
+                                            <a href="#profile-nav" class="box-block" data-toggle="collapse" aria-expanded="false">
+                                                {% if app.user %}
+                                                    <p class="mnp-name">{{ app.user.nome }}</p>
+                                                    <span class="mnp-desc">{{ app.user.email }}</span>
+                                                {% endif %}
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <ul
+                                        id="mainnav-menu" class="list-group">
+
+                                        <!--Category name-->
+                                        <li class="list-header">Imobiliária</li>
+
+                                        <li>
+                                            <a href="{{ path('dashboard') }}">
+                                                <i class="ti-bar-chart"></i>
+                                                <span class="menu-title">Painel Administrativo</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="ti-face-smile"></i>
+                                                <span class="menu-title">Clientes</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="ti-home"></i>
+                                                <span class="menu-title">Imóveis</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="ti-money"></i>
+                                                <span class="menu-title">Atualizar Vendas</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="ti-pin-alt"></i>
+                                                <span class="menu-title">Atualizar Locações</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="list-divider"></li>
+
+                                        <!--Category name-->
+                                        <li class="list-header">Configurações</li>
+
+                                        <li>
+                                            <a href="#">
+                                                <i class="ti-map-alt"></i>
+                                                <span class="menu-title">Cidades</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="ti-write"></i>
+                                                <span class="menu-title">Tipos de Imóveis</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="ti-star"></i>
+                                                <span class="menu-title">Destaques</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="ti-unlock"></i>
+                                                <span class="menu-title">Gerenciar Usuários</span>
+                                            </a>
+                                        </li>
+
+                                        <!-- Recolher menu -->
+                                        <li class="tgl-menu-btn">
+                                            <a class="mainnav-toggle" href="#">
+                                                <i class="ti-angle-left"></i>
+                                                <span class="menu-title">Fechar menu</span>
+                                            </a>
+                                        </li>
+
+                                    </div>
+                                    <div class="nano-pane" style="display: none;">
+                                        <div class="nano-slider" style="height: 1794px; transform: translate(0px);"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End menu-->
+
+                        </div>
+                    </nav>
+                    <!--END MAIN NAVIGATION-->
+
+                </div>
+
+
+                <!-- FOOTER -->
+                <footer id="footer">
+
+                    <p class="pad-lft">© {{ "now" | date("Y") }} - Fhabiana Machado</p>
+
+                </footer>
+                <!-- END FOOTER -->
+
+
+                <!-- SCROLL PAGE BUTTON -->
+                <button class="scroll-top btn"> <i class="ti-angle-up"></i> </button>
+                <div class="mainnav-backdrop"></div>
+            </div>
+            <!-- END OF CONTAINER -->
+
+
+            <!--JAVASCRIPT-->
+            <script src="{{ asset('js/pace.js') }}"></script>
+            <script src="{{ asset('js/jquery_002.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.js') }}"></script>
+            <script src="{{ asset('js/nifty.js') }}"></script>
+            <script src="{{ asset('js/all.js') }}"></script>
+
+        </body>
+    </body>
+</html></body></html></body></html>
