@@ -1,0 +1,11 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title %}Cadastrar Tipo de Imóvel{% endblock %}
+
+{% block body %}
+    <h1>Create new TipoImovel</h1>
+
+    {{ include('tipo_imovel/_form.html.twig') }}
+
+    <a href="{{ path('tipo_imovel_index') }}">back to list</a>
+{% endblock %}
