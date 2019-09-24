@@ -1,0 +1,11 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title %}New Pessoa{% endblock %}
+
+{% block body %}
+    <h1>Create new Pessoa</h1>
+
+    {{ include('pessoa/_form.html.twig') }}
+
+    <a href="{{ path('pessoa_index') }}">back to list</a>
+{% endblock %}

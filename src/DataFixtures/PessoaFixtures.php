@@ -4,10 +4,11 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\Pessoa;
 
-class PessoaFixtures extends Fixture
+class PessoaFixtures extends Fixture implements OrderedFixtureInterface
 {
     private $passwordEncoder;
 
@@ -18,19 +19,70 @@ class PessoaFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $pessoa = new Pessoa();
+        $pessoas = [
+            [
+                'id' => 1,
+                'cpf' => '01448971055',
+                'rg' => '1089489866',
+                'nome' => 'Fhabiana Thieli Machado',
+                'telefonePrincipal' => '55999074249',
+                'usuario' => 'fhabiana',
+                'email' => 'thielisantos@hotmail.com',
+                'password' => 'teste123@',
+                'cliente' => true,
+                'administrador' => true,
+            ]
+        ];
 
-        $pessoa->setCpf('01448971055');
-        $pessoa->setRg('1089489866');
-        $pessoa->setNome('Fhabiana Thieli Machado');
-        $pessoa->setTelefonePrincipal('55999074249');
-        $pessoa->setUsuario('fhabiana');
-        $pessoa->setEmail('thielisantos@hotmail.com');
-        $pessoa->setPassword($this->passwordEncoder->encodePassword($pessoa,'teste123@'));
-        $pessoa->setCliente(true);
-        $pessoa->setAdministrador(true);
-        
-        $manager->persist($pessoa);
-        $manager->flush();
+        foreach ($pessoas as $item) {
+            
+            $pessoa = $manager->getRepository(Pessoa::class)->findOneByEmail($item['email']);
+
+            if (!$pessoa) {
+                
+                $pessoa = new Pessoa();
+
+                $pessoa->setId($item['id']);
+                $pessoa->setCpf($item['cpf']);
+                $pessoa->setRg($item['rg']);
+                $pessoa->setNome($item['nome']);
+                $pessoa->setTelefonePrincipal($item['telefonePrincipal']);
+                $pessoa->setUsuario($item['usuario']);
+                $pessoa->setEmail($item['email']);
+                $pessoa->setPassword($this->passwordEncoder->encodePassword($pessoa,$item['password']));
+                $pessoa->setCliente($item['cliente']);
+                $pessoa->setAdministrador($item['administrador']);
+                
+                $manager->persist($pessoa);
+                $manager->flush();
+            
+            } else {
+
+                $pessoa->setCpf($item['cpf']);
+                $pessoa->setRg($item['rg']);
+                $pessoa->setNome($item['nome']);
+                $pessoa->setTelefonePrincipal($item['telefonePrincipal']);
+                $pessoa->setUsuario($item['usuario']);
+                $pessoa->setEmail($item['email']);
+                $pessoa->setPassword($this->passwordEncoder->encodePassword($pessoa,$item['password']));
+                $pessoa->setCliente($item['cliente']);
+                $pessoa->setAdministrador($item['administrador']);
+
+                $manager->merge($pessoa);
+                $manager->flush();
+
+            }
+
+        }
+
+    }
+
+    /**
+     * Get the order of this fixture
+     * @return int
+     */
+    public function getOrder()
+    {
+        return 1;
     }
 }

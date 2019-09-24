@@ -1,0 +1,82 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title %}Pessoa{% endblock %}
+
+{% block body %}
+    <h1>Pessoa</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ pessoa.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ pessoa.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ pessoa.roles ? pessoa.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ pessoa.password }}</td>
+            </tr>
+            <tr>
+                <th>Cpf</th>
+                <td>{{ pessoa.cpf }}</td>
+            </tr>
+            <tr>
+                <th>Rg</th>
+                <td>{{ pessoa.rg }}</td>
+            </tr>
+            <tr>
+                <th>Nome</th>
+                <td>{{ pessoa.nome }}</td>
+            </tr>
+            <tr>
+                <th>TelefonePrincipal</th>
+                <td>{{ pessoa.telefonePrincipal }}</td>
+            </tr>
+            <tr>
+                <th>TelefoneSecundario</th>
+                <td>{{ pessoa.telefoneSecundario }}</td>
+            </tr>
+            <tr>
+                <th>Usuario</th>
+                <td>{{ pessoa.usuario }}</td>
+            </tr>
+            <tr>
+                <th>Endereco</th>
+                <td>{{ pessoa.endereco }}</td>
+            </tr>
+            <tr>
+                <th>Numero</th>
+                <td>{{ pessoa.numero }}</td>
+            </tr>
+            <tr>
+                <th>Cep</th>
+                <td>{{ pessoa.cep }}</td>
+            </tr>
+            <tr>
+                <th>Complemento</th>
+                <td>{{ pessoa.complemento }}</td>
+            </tr>
+            <tr>
+                <th>Cliente</th>
+                <td>{{ pessoa.cliente ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Administrador</th>
+                <td>{{ pessoa.administrador ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('pessoa_index') }}">back to list</a>
+
+    <a href="{{ path('pessoa_edit', {'id': pessoa.id}) }}">edit</a>
+
+    {{ include('pessoa/_delete_form.html.twig') }}
+{% endblock %}
