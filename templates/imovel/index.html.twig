@@ -1,0 +1,73 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title %}Imovel index{% endblock %}
+
+{% block body %}
+    <h1>Imovel index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>TipoAnuncio</th>
+                <th>Endereco</th>
+                <th>Numero</th>
+                <th>Cep</th>
+                <th>Complemento</th>
+                <th>AreaTotal</th>
+                <th>AreaUtil</th>
+                <th>Garagem</th>
+                <th>Quarto</th>
+                <th>Banheiro</th>
+                <th>ExposicaoSolar</th>
+                <th>PosicaoPredio</th>
+                <th>Status</th>
+                <th>StatusData</th>
+                <th>Descricao</th>
+                <th>ValorProprietario</th>
+                <th>ValorCondominio</th>
+                <th>ValorIptu</th>
+                <th>ValorImobiliaria</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for imovel in imovels %}
+            <tr>
+                <td>{{ imovel.id }}</td>
+                <td>{{ imovel.titulo }}</td>
+                <td>{{ imovel.tipoAnuncio }}</td>
+                <td>{{ imovel.endereco }}</td>
+                <td>{{ imovel.numero }}</td>
+                <td>{{ imovel.cep }}</td>
+                <td>{{ imovel.complemento }}</td>
+                <td>{{ imovel.areaTotal }}</td>
+                <td>{{ imovel.areaUtil }}</td>
+                <td>{{ imovel.garagem }}</td>
+                <td>{{ imovel.quarto }}</td>
+                <td>{{ imovel.banheiro }}</td>
+                <td>{{ imovel.exposicaoSolar }}</td>
+                <td>{{ imovel.posicaoPredio }}</td>
+                <td>{{ imovel.status }}</td>
+                <td>{{ imovel.statusData ? imovel.statusData|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ imovel.descricao }}</td>
+                <td>{{ imovel.valorProprietario }}</td>
+                <td>{{ imovel.valorCondominio }}</td>
+                <td>{{ imovel.valorIptu }}</td>
+                <td>{{ imovel.valorImobiliaria }}</td>
+                <td>
+                    <a href="{{ path('imovel_show', {'id': imovel.id}) }}">show</a>
+                    <a href="{{ path('imovel_edit', {'id': imovel.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="22">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('imovel_new') }}">Create new</a>
+{% endblock %}

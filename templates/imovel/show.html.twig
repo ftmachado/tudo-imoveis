@@ -1,0 +1,102 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title %}Imovel{% endblock %}
+
+{% block body %}
+    <h1>Imovel</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ imovel.id }}</td>
+            </tr>
+            <tr>
+                <th>Titulo</th>
+                <td>{{ imovel.titulo }}</td>
+            </tr>
+            <tr>
+                <th>TipoAnuncio</th>
+                <td>{{ imovel.tipoAnuncio }}</td>
+            </tr>
+            <tr>
+                <th>Endereco</th>
+                <td>{{ imovel.endereco }}</td>
+            </tr>
+            <tr>
+                <th>Numero</th>
+                <td>{{ imovel.numero }}</td>
+            </tr>
+            <tr>
+                <th>Cep</th>
+                <td>{{ imovel.cep }}</td>
+            </tr>
+            <tr>
+                <th>Complemento</th>
+                <td>{{ imovel.complemento }}</td>
+            </tr>
+            <tr>
+                <th>AreaTotal</th>
+                <td>{{ imovel.areaTotal }}</td>
+            </tr>
+            <tr>
+                <th>AreaUtil</th>
+                <td>{{ imovel.areaUtil }}</td>
+            </tr>
+            <tr>
+                <th>Garagem</th>
+                <td>{{ imovel.garagem }}</td>
+            </tr>
+            <tr>
+                <th>Quarto</th>
+                <td>{{ imovel.quarto }}</td>
+            </tr>
+            <tr>
+                <th>Banheiro</th>
+                <td>{{ imovel.banheiro }}</td>
+            </tr>
+            <tr>
+                <th>ExposicaoSolar</th>
+                <td>{{ imovel.exposicaoSolar }}</td>
+            </tr>
+            <tr>
+                <th>PosicaoPredio</th>
+                <td>{{ imovel.posicaoPredio }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ imovel.status }}</td>
+            </tr>
+            <tr>
+                <th>StatusData</th>
+                <td>{{ imovel.statusData ? imovel.statusData|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Descricao</th>
+                <td>{{ imovel.descricao }}</td>
+            </tr>
+            <tr>
+                <th>ValorProprietario</th>
+                <td>{{ imovel.valorProprietario }}</td>
+            </tr>
+            <tr>
+                <th>ValorCondominio</th>
+                <td>{{ imovel.valorCondominio }}</td>
+            </tr>
+            <tr>
+                <th>ValorIptu</th>
+                <td>{{ imovel.valorIptu }}</td>
+            </tr>
+            <tr>
+                <th>ValorImobiliaria</th>
+                <td>{{ imovel.valorImobiliaria }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('imovel_index') }}">back to list</a>
+
+    <a href="{{ path('imovel_edit', {'id': imovel.id}) }}">edit</a>
+
+    {{ include('imovel/_delete_form.html.twig') }}
+{% endblock %}
