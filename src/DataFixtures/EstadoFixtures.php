@@ -171,8 +171,8 @@ class EstadoFixtures extends Fixture implements OrderedFixtureInterface
                 
             } else {
 
-                $estado->setnome($item['nome']);
-                $estado->setsigla($item['sigla']);
+                $estado->setNome($item['nome']);
+                $estado->setSigla($item['sigla']);
 
                 $manager->merge($estado);
                 $manager->flush();

@@ -1,0 +1,11 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title %}New ImobiliariaAtuacao{% endblock %}
+
+{% block body %}
+    <h1>Create new ImobiliariaAtuacao</h1>
+
+    {{ include('imobiliaria_atuacao/_form.html.twig') }}
+
+    <a href="{{ path('imobiliaria_atuacao_index') }}">back to list</a>
+{% endblock %}

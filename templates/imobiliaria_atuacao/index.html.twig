@@ -1,0 +1,33 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title %}ImobiliariaAtuacao index{% endblock %}
+
+{% block body %}
+    <h1>ImobiliariaAtuacao index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for imobiliaria_atuacao in imobiliaria_atuacaos %}
+            <tr>
+                <td>{{ imobiliaria_atuacao.id }}</td>
+                <td>
+                    <a href="{{ path('imobiliaria_atuacao_show', {'id': imobiliaria_atuacao.id}) }}">show</a>
+                    <a href="{{ path('imobiliaria_atuacao_edit', {'id': imobiliaria_atuacao.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('imobiliaria_atuacao_new') }}">Create new</a>
+{% endblock %}

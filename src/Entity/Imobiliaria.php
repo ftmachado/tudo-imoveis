@@ -32,6 +32,13 @@ class Imobiliaria
      */
     private $telefone;
 
+    public function setId(int $id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
