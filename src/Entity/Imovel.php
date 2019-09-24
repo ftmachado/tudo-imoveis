@@ -176,12 +176,12 @@ class Imovel
         return $this;
     }
 
-    public function getTipoAnuncio(): ?int
+    public function getTipoAnuncio(): ?String
     {
         return $this->tipoAnuncio;
     }
 
-    public function setTipoAnuncio(int $tipoAnuncio): self
+    public function setTipoAnuncio(String $tipoAnuncio): self
     {
         $this->tipoAnuncio = $tipoAnuncio;
 
@@ -356,12 +356,12 @@ class Imovel
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatus(): ?String
     {
         return $this->status;
     }
 
-    public function setStatus(?int $status): self
+    public function setStatus(?String $status): self
     {
         $this->status = $status;
 

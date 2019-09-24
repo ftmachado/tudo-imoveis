@@ -7,5 +7,56 @@
 
     {{ include('imovel/_form.html.twig') }}
 
+<form action="{{ path('imovel_new') }}"
+      class="dropzone"
+      id="myDropzone"></form>
+
+
+{# <fieldset>
+        <legend>Fotos do Imóvel</legend> #}
+
+        {# <form action="{{ path('imovel_new') }}" class="dropzone" id="meuPrimeiroDropzone">
+            {# <div class="dz-default dz-message">
+                <div class="dz-upload-icon"></div>
+                Solte seus arquivos aqui<br>
+                <span class="dz-text-small">ou clique para adicionar manualmente</span>
+            </div> #}
+            {# <div class="fallback">
+                <input name="fileToUpload" type="file" multiple>
+            </div> #}
+        {# </form> #}
+    {# </fieldset> #}
+
+
     <a href="{{ path('imovel_index') }}">back to list</a>
+
+{% endblock %}
+
+{% block extrajavascript %}
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        // Dropzone.options.dropzonejs = {
+        // var myDropzone = new Dropzone("div#myDropzone", {
+        //     url: "{{ path('imovel_new') }}",
+        //     paramName: "file_upload_file", 
+        //     parallelUploads: 10,
+        //     maxFilesize: 5,  // MB
+        //     uploadMultiple: true, // upload files in a single request
+        //     maxFiles: 2,
+        //     acceptedFiles: ".jpg, .jpeg, .png, .gif",
+        //     addRemoveLinks: true,
+        //     // Language Strings
+		// 	dictFileTooBig: "Arquivo muito grande. O tamanho de máximo de upload é 5MB.",
+		// 	dictInvalidFileType: "Formato de arquivo inválido!",
+		// 	dictCancelUpload: "Cancelar",
+		// 	dictRemoveFile: "Remove",
+		// 	dictMaxFilesExceeded: "São permitidos apenas 10 arquivos por vez.",
+        //     dictDefaultMessage: "Arraste seus arquivos para cá!"
+        // });
+
+        console.log(Dropzone);
+
+    });
+</script>
 {% endblock %}
