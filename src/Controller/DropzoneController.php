@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DropzoneController extends AbstractController
 {
@@ -12,12 +13,10 @@ class DropzoneController extends AbstractController
      */
     public function input()
     {
-        
-        $uploaddir = './uploads';
-        $uploadfile = $uploaddir . basename($_FILES['fileToUpload']['name']); 
+       
+        $uploadfile = "./uploads/" . basename($_FILES['file']['name']); 
                
-        echo "<pre>";
-        if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $uploadfile)) {
+        if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
               echo "O arquivo é valido e foi carregado com sucesso.\n";
        } else {
              echo "Algo está errado aqui!\n";
@@ -26,8 +25,6 @@ class DropzoneController extends AbstractController
        echo "Aqui estão algumas informações de depuração para você:";
        print_r($_FILES);
               
-       print "</pre>";
-    
        return new JsonResponse([], JsonResponse::HTTP_OK);
     }
 }

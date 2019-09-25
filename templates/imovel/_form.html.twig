@@ -1,4 +1,188 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<form class="form-horizontal form-padding" action="{{ path('imovel_new') }}" method="post">
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.titulo.vars['id'] }}">Título</label>
+        <div class="col-md-4">
+            {{ form_widget(form.titulo) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.tipoAnuncio.vars['id'] }}">Tipo de Anúncio</label>
+        <div class="col-md-4">
+            {{ form_widget(form.tipoAnuncio) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.endereco.vars['id'] }}">Endereço</label>
+        <div class="col-md-4">
+            {{ form_widget(form.endereco) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.numero.vars['id'] }}">Número</label>
+        <div class="col-md-4">
+            {{ form_widget(form.numero) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.cep.vars['id'] }}">CEP</label>
+        <div class="col-md-4">
+            {{ form_widget(form.cep) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.complemento.vars['id'] }}">Complemento</label>
+        <div class="col-md-4">
+            {{ form_widget(form.complemento) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.areaTotal.vars['id'] }}">Área Total</label>
+        <div class="col-md-4">
+            {{ form_widget(form.areaTotal) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.areaUtil.vars['id'] }}">Área Útil</label>
+        <div class="col-md-4">
+            {{ form_widget(form.areaUtil) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.garagem.vars['id'] }}">Garagem</label>
+        <div class="col-md-4">
+            {{ form_widget(form.garagem) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.quarto.vars['id'] }}">Quarto</label>
+        <div class="col-md-4">
+            {{ form_widget(form.quarto) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.banheiro.vars['id'] }}">Banheiro</label>
+        <div class="col-md-4">
+            {{ form_widget(form.banheiro) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.exposicaoSolar.vars['id'] }}">Exposição Solar</label>
+        <div class="col-md-4">
+            {{ form_widget(form.exposicaoSolar) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.posicaoPredio.vars['id'] }}">Posição do Prédio</label>
+        <div class="col-md-4">
+            {{ form_widget(form.posicaoPredio) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.status.vars['id'] }}">Status</label>
+        <div class="col-md-4">
+            {{ form_widget(form.status) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.descricao.vars['id'] }}">Descrição</label>
+        <div class="col-md-4">
+            {{ form_widget(form.descricao) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.valorProprietario.vars['id'] }}">Valor do Proprietário</label>
+        <div class="col-md-4">
+            {{ form_widget(form.valorProprietario) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.valorCondominio.vars['id'] }}">Valor do Condomínio</label>
+        <div class="col-md-4">
+            {{ form_widget(form.valorCondominio) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.valorIptu.vars['id'] }}">Valor do IPTU</label>
+        <div class="col-md-4">
+            {{ form_widget(form.valorIptu) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.valorImobiliaria.vars['id'] }}">Valor da Imobiliária</label>
+        <div class="col-md-4">
+            {{ form_widget(form.valorImobiliaria) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.fkTipoImovelId.vars['id'] }}">Tipo de Imóvel</label>
+        <div class="col-md-4">
+            {{ form_widget(form.fkTipoImovelId) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.fkEstadoId.vars['id'] }}">Estado</label>
+        <div class="col-md-4">
+            {{ form_widget(form.fkEstadoId) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.fkCidadeId.vars['id'] }}">Cidade</label>
+        <div class="col-md-4">
+            {{ form_widget(form.fkCidadeId) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.fkBairroId.vars['id'] }}">Bairro</label>
+        <div class="col-md-4">
+            {{ form_widget(form.fkBairroId) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.fkProprietarioId.vars['id'] }}">Proprietário</label>
+        <div class="col-md-4">
+            {{ form_widget(form.fkProprietarioId) }}
+        </div>
+    </div>            			        
+
+</form>
+
+<form id="demo-dropzone" action="{{ path('file_input') }}" class="dropzone">
+    <div class="dz-default dz-message">
+        <div class="dz-icon">
+            <i class="ti-cloud-up icon-5x"></i>
+        </div>
+        <div>
+            <span class="dz-text">Drop files to upload</span>
+            <p class="text-sm text-muted">or click to pick manually</p>
+        </div>
+    </div>
+    <div class="fallback">
+        <input name="file" type="file" multiple>
+    </div>
+</form>
+
+<button class="btn btn-primary" type="submit">{{ button_label|default('Save') }}</button>

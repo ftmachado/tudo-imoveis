@@ -5,25 +5,14 @@
 {% block body %}
     <h1>Pessoa index</h1>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
                 <th>Cpf</th>
-                <th>Rg</th>
                 <th>Nome</th>
                 <th>TelefonePrincipal</th>
-                <th>TelefoneSecundario</th>
-                <th>Usuario</th>
-                <th>Endereco</th>
-                <th>Numero</th>
-                <th>Cep</th>
-                <th>Complemento</th>
-                <th>Cliente</th>
-                <th>Administrador</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -32,20 +21,9 @@
             <tr>
                 <td>{{ pessoa.id }}</td>
                 <td>{{ pessoa.email }}</td>
-                <td>{{ pessoa.roles ? pessoa.roles|json_encode : '' }}</td>
-                <td>{{ pessoa.password }}</td>
                 <td>{{ pessoa.cpf }}</td>
-                <td>{{ pessoa.rg }}</td>
                 <td>{{ pessoa.nome }}</td>
                 <td>{{ pessoa.telefonePrincipal }}</td>
-                <td>{{ pessoa.telefoneSecundario }}</td>
-                <td>{{ pessoa.usuario }}</td>
-                <td>{{ pessoa.endereco }}</td>
-                <td>{{ pessoa.numero }}</td>
-                <td>{{ pessoa.cep }}</td>
-                <td>{{ pessoa.complemento }}</td>
-                <td>{{ pessoa.cliente ? 'Yes' : 'No' }}</td>
-                <td>{{ pessoa.administrador ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('pessoa_show', {'id': pessoa.id}) }}">show</a>
                     <a href="{{ path('pessoa_edit', {'id': pessoa.id}) }}">edit</a>

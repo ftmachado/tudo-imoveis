@@ -34,6 +34,9 @@ class ImovelType extends AbstractType
                 'choices'  => [
                     'Alugar' => 'alugar',
                     'Vender' => 'vender',
+                ],
+                'attr' => [
+                    'class' => 'magic-radio'
                 ]
             ])
 

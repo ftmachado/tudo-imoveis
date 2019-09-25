@@ -5,10 +5,12 @@
 {% block body %}
     <h1>ImobiliariaAtuacao index</h1>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Estado</th>
+                <th>Cidade</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -16,6 +18,8 @@
         {% for imobiliaria_atuacao in imobiliaria_atuacaos %}
             <tr>
                 <td>{{ imobiliaria_atuacao.id }}</td>
+                <td>{{ imobiliaria_atuacao.fkEstadoId.nome }}</td>
+                <td>{{ imobiliaria_atuacao.fkCidadeId.nome }}</td>
                 <td>
                     <a href="{{ path('imobiliaria_atuacao_show', {'id': imobiliaria_atuacao.id}) }}">show</a>
                     <a href="{{ path('imobiliaria_atuacao_edit', {'id': imobiliaria_atuacao.id}) }}">edit</a>
