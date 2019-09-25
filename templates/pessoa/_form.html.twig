@@ -1,4 +1,12 @@
-<form class="form-horizontal form-padding" action="{{ path('pessoa_new') }}" method="post">
+{# <form class="form-horizontal form-padding" action="{{ path('pessoa_new') }}" method="post"> #}
+<form class="form-horizontal form-padding" method="post">
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.nome.vars['id'] }}">Nome</label>
+        <div class="col-md-4">
+            {{ form_widget(form.nome) }}
+        </div>
+    </div>
 
     <div class="form-group form-message-light">
         <label class="col-md-3 control-label" for="{{ form.email.vars['id'] }}">E-mail</label>
@@ -84,6 +92,6 @@
         </div>
     </div>
 
-</form>
+    <button class="btn">{{ button_label|default('Save') }}</button>
 
-<button class="btn btn-primary" type="submit">{{ button_label|default('Save') }}</button>
+</form>
