@@ -167,26 +167,41 @@ class ImovelType extends AbstractType
             ->add('fkTipoImovelId', EntityType::class, [
                 'class' => TipoImovel::class,
                 'choice_label' => 'nome',
+                'attr' => [
+                    'class' => 'form-control',
+                ]
             ])
 
             ->add('fkEstadoId', EntityType::class, [
                 'class' => Estado::class,
                 'choice_label' => 'nome',
+                'attr' => [
+                    'class' => 'form-control',
+                ]
             ])
 
             ->add('fkCidadeId', EntityType::class, [
                 'class' => Cidade::class,
                 'choice_label' => 'nome',
+                'attr' => [
+                    'class' => 'form-control',
+                ]
             ])
 
             ->add('fkBairroId', EntityType::class, [
                 'class' => Bairro::class,
                 'choice_label' => 'nome',
+                'attr' => [
+                    'class' => 'form-control',
+                ]
             ])
 
             ->add('fkProprietarioId', EntityType::class, [
                 'class' => Pessoa::class,
                 'choice_label' => 'nome',
+                'attr' => [
+                    'class' => 'form-control',
+                ]
             ])
         ;
     }

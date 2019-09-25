@@ -1,4 +1,26 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<form class="form-horizontal form-padding" action="{{ path('imobiliaria_atuacao_new') }}" method="post">
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.fkImobiliariaId.vars['id'] }}">Imobiliária</label>
+        <div class="col-md-4">
+            {{ form_widget(form.fkImobiliariaId) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.fkEstadoId.vars['id'] }}">Estado</label>
+        <div class="col-md-4">
+            {{ form_widget(form.fkEstadoId) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.fkCidadeId.vars['id'] }}">Cidade</label>
+        <div class="col-md-4">
+            {{ form_widget(form.fkCidadeId) }}
+        </div>
+    </div>
+
+</form>
+
+<button class="btn btn-primary" type="submit">{{ button_label|default('Save') }}</button>

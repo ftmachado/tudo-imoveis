@@ -19,16 +19,25 @@ class ImobiliariaAtuacaoType extends AbstractType
             ->add('fkImobiliariaId', EntityType::class, [
                 'class' => Imobiliaria::class,
                 'choice_label' => 'nomeFantasia',
+                'attr' => [
+                    'class' => 'form-control',
+                ]
             ])
             
             ->add('fkEstadoId', EntityType::class, [
                 'class' => Estado::class,
                 'choice_label' => 'nome',
+                'attr' => [
+                    'class' => 'form-control',
+                ]
             ])
 
             ->add('fkCidadeId', EntityType::class, [
                 'class' => Cidade::class,
                 'choice_label' => 'nome',
+                'attr' => [
+                    'class' => 'form-control',
+                ]
             ])
 
         ;

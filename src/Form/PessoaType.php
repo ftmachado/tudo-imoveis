@@ -93,16 +93,25 @@ class PessoaType extends AbstractType
             ->add('fkEstadoId', EntityType::class, [
                 'class' => Estado::class,
                 'choice_label' => 'nome',
+                'attr' => [
+                    'class' => 'form-control',
+                ]
             ])
             
             ->add('fkCidadeId', EntityType::class, [
                 'class' => Cidade::class,
                 'choice_label' => 'nome',
+                'attr' => [
+                    'class' => 'form-control',
+                ]
             ])
             
             ->add('fkBairroId', EntityType::class, [
                 'class' => Bairro::class,
                 'choice_label' => 'nome',
+                'attr' => [
+                    'class' => 'form-control',
+                ]
             ])
             
             ->remove('roles')
