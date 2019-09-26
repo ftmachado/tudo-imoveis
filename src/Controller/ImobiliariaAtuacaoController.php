@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\ImobiliariaAtuacao;
+use App\Entity\Cidade;
 use App\Form\ImobiliariaAtuacaoType;
 use App\Repository\ImobiliariaAtuacaoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * @Route("/imobiliaria-atuacao")
@@ -30,17 +32,28 @@ class ImobiliariaAtuacaoController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $entityManager = $this->getDoctrine()->getManager();
         $imobiliariaAtuacao = new ImobiliariaAtuacao();
         $form = $this->createForm(ImobiliariaAtuacaoType::class, $imobiliariaAtuacao);
-        $form->handleRequest($request);
+        
+        try{
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($imobiliariaAtuacao);
-            $entityManager->flush();
+            if ($request->isMethod('POST')) {
 
-            return $this->redirectToRoute('imobiliaria_atuacao_index');
-        }
+                $form->handleRequest($request);
+
+                $cidadeId = $request->request->get('imobiliaria_atuacao')['fkCidadeId'];
+                $imobiliariaAtuacao->setFkCidadeId( $entityManager->getRepository(Cidade::class)->findOneById($cidadeId) );
+
+                $entityManager->persist($imobiliariaAtuacao);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('imobiliaria_atuacao_index');
+
+            }
+        }catch (\Exception $e){
+            throw new Exception($e->getMessage());
+        } 
 
         return $this->render('imobiliaria_atuacao/new.html.twig', [
             'imobiliaria_atuacao' => $imobiliariaAtuacao,
@@ -63,13 +76,23 @@ class ImobiliariaAtuacaoController extends AbstractController
      */
     public function edit(Request $request, ImobiliariaAtuacao $imobiliariaAtuacao): Response
     {
+        $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(ImobiliariaAtuacaoType::class, $imobiliariaAtuacao);
-        $form->handleRequest($request);
+        
+        if ($request->isMethod('POST')) {
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $form->handleRequest($request);
 
-            return $this->redirectToRoute('imobiliaria_atuacao_index');
+            try{
+
+                $em->merge($imobiliariaAtuacao);
+	    		$em->flush();
+                return $this->redirectToRoute('imobiliaria_atuacao_index');
+
+            }catch (\Exception $e){
+                throw new Exception($e->getMessage());
+            }
+
         }
 
         return $this->render('imobiliaria_atuacao/edit.html.twig', [

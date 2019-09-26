@@ -11,3 +11,35 @@
 
     {{ include('imobiliaria_atuacao/_delete_form.html.twig') }}
 {% endblock %}
+
+{% block extrajavascript %}
+<script type="text/javascript">
+    $(document).ready( function() {
+        // Ao mudar o estado, busca as cidades referentes ao estado selecionado
+        $("#imobiliaria_atuacao_fkEstadoId").on('change', function(){
+
+            $.ajax({
+                type: "POST",
+                url: "{{ path('pessoa_lista_cidades') }}",
+                cache: false,
+                data: {
+                    'estadoId': this.value
+                }
+            }).done(function(cities) {
+
+                let options = '';
+                $.each(cities, function(i, item){
+                    options += '<option value="'+item['id']+'">'+item['nome']+'</option>';
+                });
+                
+                $("#imobiliaria_atuacao_fkCidadeId").empty().append(options);
+
+            }).fail(function(){
+                console.log( 'Falha ao buscar as cidades.' );
+            });
+
+        });
+
+    });
+</script>
+{% endblock %}

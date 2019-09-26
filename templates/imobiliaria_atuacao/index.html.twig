@@ -19,7 +19,7 @@
             <tr>
                 <td>{{ imobiliaria_atuacao.id }}</td>
                 <td>{{ imobiliaria_atuacao.fkEstadoId.nome }}</td>
-                <td>{{ imobiliaria_atuacao.fkCidadeId.nome }}</td>
+                <td>{% if imobiliaria_atuacao.fkCidadeId %}{{ imobiliaria_atuacao.fkCidadeId.nome }}{% endif %}</td>
                 <td>
                     <a href="{{ path('imobiliaria_atuacao_show', {'id': imobiliaria_atuacao.id}) }}">show</a>
                     <a href="{{ path('imobiliaria_atuacao_edit', {'id': imobiliaria_atuacao.id}) }}">edit</a>
