@@ -168,21 +168,4 @@
         </div>
     </div>            			        
 
-    <button class="btn btn-primary" type="submit">{{ button_label|default('Save') }}</button>
-
-</form>
-
-<form id="form-dropzone" action="{{ path('file_input') }}" class="dropzone">
-    <div class="dz-default dz-message">
-        <div class="dz-icon">
-            <i class="ti-cloud-up icon-5x"></i>
-        </div>
-        <div>
-            <span class="dz-text">Drop files to upload</span>
-            <p class="text-sm text-muted">or click to pick manually</p>
-        </div>
-    </div>
-    <div class="fallback">
-        <input name="file" type="file" multiple>
-    </div>
 </form>

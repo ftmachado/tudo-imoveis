@@ -7,6 +7,23 @@
 
     {{ include('imovel/_form.html.twig', {'button_label': 'Update'}) }}
 
+    <form id="form-dropzone" action="{{ path('file_edit', {'id': app.request.get('id')} ) }}" class="dropzone">
+        <div class="dz-default dz-message">
+            <div class="dz-icon">
+                <i class="ti-cloud-up icon-5x"></i>
+            </div>
+            <div>
+                <span class="dz-text">Drop files to upload</span>
+                <p class="text-sm text-muted">or click to pick manually</p>
+            </div>
+        </div>
+        <div class="fallback">
+            <input name="file" type="file" multiple>
+        </div>
+    </form>
+
+    <button id="save" class="btn btn-primary" type="submit">{{ button_label|default('Save') }}</button>
+
     <a href="{{ path('imovel_index') }}">back to list</a>
 
     {{ include('imovel/_delete_form.html.twig') }}
@@ -14,8 +31,52 @@
 
 {% block extrajavascript %}
 <script type="text/javascript">
+
+    /*
+    * Fonte: https://github.com/enyo/dropzone/wiki/FAQ#how-to-show-files-already-stored-on-server
+    */
+
+    Dropzone.options.formDropzone = {
+        maxFileSize : 4, //MB
+        parallelUploads : 10,
+        uploadMultiple: false,
+        addRemoveLinks : true,
+        acceptedFiles: ".jpg, .jpeg, .png, .gif",
+        // resize: function(file) {
+        //     return {
+        //         srcX: 0,
+        //         srcY: 0,
+        //         srcWidth: file.width,
+        //         srcHeight: file.height,
+        //         trgWidth: 160,
+        //         trgHeight: 120,
+        //     };
+        // },
+        init: function() {
+
+            var thisDropzone = this;
+
+            $.getJSON("{{ path('file_edit', {'id': app.request.get('id')} )}}", function(data) {
+
+                $.each(data, function(key,value){
+
+                    console.log(value);
+
+                    var mockFile = { name: value.name, size: value.size }; // here we get the file name and size as response 
+
+                    thisDropzone.options.addedfile.call(thisDropzone, mockFile);
+
+                    thisDropzone.options.thumbnail.call(thisDropzone, mockFile, value.file);
+
+                });
+
+            });
+        }
+
+    };
+
     $(document).ready( function() {
-        
+
         $("#imovel_fkEstadoId").on('change', function(){
 
             $.ajax({
@@ -39,6 +100,11 @@
             });
 
         });
+
+        $('#save').on('click', function(){
+            $('#form-imovel').submit();
+        });
+        
     });
 </script>
 {% endblock %}
