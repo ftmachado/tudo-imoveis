@@ -1,26 +1,170 @@
 {% extends 'layout-admin.html.twig' %}
 
+{% block extracss %}
+<style>
+    /* Set the size of the div element that contains the map */
+    #map {
+    height: 400px;  /* The height is 400 pixels */
+    width: 100%;  /* The width is the width of the web page */
+    }
+</style>
+{% endblock %}
+
 {% block pagehead %}
 <div class="pad-all text-center">
-    <h3>Welcome back to the Dashboard.</h3>
-    <p1>Scroll down to see quick links and overviews of your Server, To do list, Order status or get some Help using Nifty.<p></p>
+    <h3>Bem vindo a {{ nomeImobiliaria }}</h3>
+    <p1>Aqui você encontra as principais informações sobre ela.<p></p>
     </p1>
 </div>
 {% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-warning panel-colorful media middle pad-all">
+            <div class="media-left">
+                <div class="pad-hor">
+                    <i class="ti-home icon-3x"></i>
+                </div>
+            </div>
+            <div class="media-body">
+                <p class="text-2x mar-no text-semibold">{{ total.vender }}</p>
+                <p class="mar-no">Para vender</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-info panel-colorful media middle pad-all">
+            <div class="media-left">
+                <div class="pad-hor">
+                    <i class="ti-pin-alt icon-3x"></i>
+                </div>
+            </div>
+            <div class="media-body">
+                <p class="text-2x mar-no text-semibold">{{ total.alugar }}</p>
+                <p class="mar-no">Para alugar</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-mint panel-colorful media middle pad-all">
+            <div class="media-left">
+                <div class="pad-hor">
+                    <i class="ti-face-smile icon-3x"></i>
+                </div>
+            </div>
+            <div class="media-body">
+                <p class="text-2x mar-no text-semibold">{{ total.cliente }}</p>
+                <p class="mar-no">Clientes</p>
+            </div>
+        </div>
+    </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Thieli/Documents/php-workspace/tudo-imoveis/src/Controller/DashboardController.php'|file_link(0) }}">src/Controller/DashboardController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Thieli/Documents/php-workspace/tudo-imoveis/templates/dashboard/index.html.twig'|file_link(0) }}">templates/dashboard/index.html.twig</a></code></li>
-    </ul>
 </div>
+
+<div class="row">
+					
+    <div class="panel col-md-6">
+        <div class="panel-heading">
+            <h3 class="panel-title">Total de vendas e locações por mês</h3>
+        </div>
+        <div class="panel-body">
+            <div id="demo-flot-bar" style="height: 250px; padding: 0px; position: relative;">
+                <canvas class="flot-base" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 494.5px; height: 250px;" width="494" height="250"></canvas><div class="flot-text" style="position: absolute; inset: 0px; font-size: smaller; color: rgb(84, 84, 84);"><div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; inset: 0px;"><div style="position: absolute; max-width: 44px; top: 235px; left: 15px; text-align: center;" class="flot-tick-label tickLabel">1</div><div style="position: absolute; max-width: 44px; top: 235px; left: 64px; text-align: center;" class="flot-tick-label tickLabel">2</div><div style="position: absolute; max-width: 44px; top: 235px; left: 113px; text-align: center;" class="flot-tick-label tickLabel">3</div><div style="position: absolute; max-width: 44px; top: 235px; left: 161px; text-align: center;" class="flot-tick-label tickLabel">4</div><div style="position: absolute; max-width: 44px; top: 235px; left: 210px; text-align: center;" class="flot-tick-label tickLabel">5</div><div style="position: absolute; max-width: 44px; top: 235px; left: 259px; text-align: center;" class="flot-tick-label tickLabel">6</div><div style="position: absolute; max-width: 44px; top: 235px; left: 308px; text-align: center;" class="flot-tick-label tickLabel">7</div><div style="position: absolute; max-width: 44px; top: 235px; left: 357px; text-align: center;" class="flot-tick-label tickLabel">8</div><div style="position: absolute; max-width: 44px; top: 235px; left: 405px; text-align: center;" class="flot-tick-label tickLabel">9</div><div style="position: absolute; max-width: 44px; top: 235px; left: 451px; text-align: center;" class="flot-tick-label tickLabel">10</div></div><div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; inset: 0px;"><div style="position: absolute; top: 221px; left: 6px; text-align: right;" class="flot-tick-label tickLabel">0</div><div style="position: absolute; top: 166px; left: 6px; text-align: right;" class="flot-tick-label tickLabel">5</div><div style="position: absolute; top: 111px; left: 0px; text-align: right;" class="flot-tick-label tickLabel">10</div><div style="position: absolute; top: 56px; left: 0px; text-align: right;" class="flot-tick-label tickLabel">15</div><div style="position: absolute; top: 0px; left: 0px; text-align: right;" class="flot-tick-label tickLabel">20</div></div></div><canvas class="flot-overlay" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 494.5px; height: 250px;" width="494" height="250">
+                </canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">Mapa</h3>
+        </div>
+        <div class="panel-body">
+            <div id="map"></div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extrajavascript %}
+<script src="{{ asset('js/jquery.flot.min.js') }}"></script>
+
+<script>
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  var uluru = {lat: -25.344, lng: 131.036};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 4, center: uluru});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: uluru, map: map});
+}
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7Loue_JEn-iSsKFFWgyyYWrhKNkGlkEQ&callback=initMap">
+    </script>
+
+
+<script type="text/javascript">
+    $(document).ready( function() {
+    
+    // FLOT BAR CHART
+    // Require Flot Charts
+    // -----------------------------------------------------------------
+    // http://www.flotcharts.org/
+    // =================================================================
+    var data = [[1, 10], [2, 8], [3, 4], [4, 13], [5, 17], [6, 9], [7, 12], [8, 15], [9, 9], [10, 15]];
+
+    $.plot('#demo-flot-bar', [data], {
+        series: {
+            bars: {
+                show: true,
+                barWidth: 0.6,
+                fill: true,
+                fillColor: {
+                    colors: [{
+                        opacity: 0.9
+                    }, {
+                        opacity: 0.9
+                    }]
+                }
+            }
+        },
+        colors: ['#9B59B6'],
+        yaxis: {
+            ticks: 5,
+            tickColor: 'rgba(0,0,0,.1)'
+        },
+        xaxis: {
+            ticks: 7,
+            tickColor: 'transparent'
+        },
+        grid: {
+            hoverable: true,
+            clickable: true,
+            tickColor: '#eeeeee',
+            borderWidth: 0
+        },
+        legend: {
+            show: true,
+            position: 'nw'
+        },
+        tooltip: {
+            show: true,
+            content: 'x: %x, y: %y'
+        }
+    });
+});
+</script>
 {% endblock %}
