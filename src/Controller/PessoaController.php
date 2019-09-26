@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * @Route("/pessoa")
+ * @Route("/admin/pessoa")
  */
 class PessoaController extends AbstractController
 {

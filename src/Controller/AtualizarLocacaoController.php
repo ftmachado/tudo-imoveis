@@ -13,7 +13,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 class AtualizarLocacaoController extends AbstractController
 {
     /**
-     * @Route("/atualizar-locacao", name="atualizar_locacao")
+     * @Route("/admin/atualizar-locacao", name="atualizar_locacao")
      */
     public function index(ImovelRepository $imovelRepository, Request $request)
     {

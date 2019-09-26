@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
- * @Route("/imobiliaria-atuacao")
+ * @Route("/admin/imobiliaria-atuacao")
  */
 class ImobiliariaAtuacaoController extends AbstractController
 {

@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class DropzoneController extends AbstractController
 {
     /**
-     * @Route("/file-input", name="file_input")
+     * @Route("/admin/file-input", name="file_input")
      */
     public function input()
     {

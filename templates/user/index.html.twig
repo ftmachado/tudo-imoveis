@@ -3,5 +3,39 @@
 {% block title %}Gerenciar Usuários{% endblock %}
 
 {% block body %}
-Não disponível ainda.
+    <h1>Usuários administradores</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Cpf</th>
+                <th>TelefonePrincipal</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pessoa in pessoas %}
+            <tr>
+                <td>{{ pessoa.id }}</td>
+                <td>{{ pessoa.nome }}</td>
+                <td>{{ pessoa.email }}</td>
+                <td>{{ pessoa.cpf }}</td>
+                <td>{{ pessoa.telefonePrincipal }}</td>
+                <td>
+                    <a href="{{ path('user_show', {'id': pessoa.id}) }}">show</a>
+                    {# <a href="{{ path('user_edit', {'id': pessoa.id}) }}">edit</a> #}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="17">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_new') }}">Criar novo usuário</a>
 {% endblock %}

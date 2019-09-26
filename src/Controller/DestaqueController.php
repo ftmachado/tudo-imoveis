@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DestaqueController extends AbstractController
 {
     /**
-     * @Route("/destaque", name="destaque_index")
+     * @Route("/admin/destaque", name="destaque_index")
      */
     public function index()
     {

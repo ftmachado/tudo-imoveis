@@ -12,7 +12,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 class AtualizarVendaController extends AbstractController
 {
     /**
-     * @Route("/atualizar-venda", name="atualizar_venda")
+     * @Route("/admin/atualizar-venda", name="atualizar_venda")
      */
     public function index(ImovelRepository $imovelRepository, Request $request)
     {

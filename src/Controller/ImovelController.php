@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
- * @Route("/imovel")
+ * @Route("/admin/imovel")
  */
 class ImovelController extends AbstractController
 {
