@@ -1,0 +1,56 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title %}Atualizar Vendas{% endblock %}
+
+{% block body %}
+    <h1>Atualizar Vendas</h1>
+
+<form class="form-horizontal form-padding" method="post">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>TipoAnuncio</th>
+                <th>Endereco</th>
+                <th>Numero</th>
+                <th>Status</th>
+                <th>ValorProprietario</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for imovel in imovels %}
+            <tr>
+                <td><input type="checkbox" name="atualizar_venda[checkVenda][]" value="{{ imovel.id }}"></td>
+                <td>{{ imovel.id }}</td>
+                <td>{{ imovel.titulo }}</td>
+                <td>{{ imovel.tipoAnuncio }}</td>
+                <td>{{ imovel.endereco }}</td>
+                <td>{{ imovel.numero }}</td>
+                <td>{{ imovel.status }}</td>
+                <td>{{ imovel.valorProprietario }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="22">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="form-group form-message-light">
+        <label class="col-md-1 control-label" for="atualizar_venda_status">Status</label>
+        <div class="col-md-4">
+            <select id="atualizar_venda_status" name="atualizar_venda[status]" class="form-control">
+                <option value="vendido">Vendido</option>
+                <option value="cancelado">Cancelado</option>
+            </select>
+        </div>
+    </div>
+    <br>
+    <button class="btn btn-primary" type="submit">Atualizar</button>
+
+</form>
+{% endblock %}

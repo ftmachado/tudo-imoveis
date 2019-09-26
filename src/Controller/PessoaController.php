@@ -100,11 +100,10 @@ class PessoaController extends AbstractController
                 return $this->redirectToRoute('pessoa_index');
 
             }catch (\Exception $e){
-    
                 throw new Exception($e->getMessage());
                 // $request->getSession()->getFlashBag()->set('error', );
-                
-            } 
+            }
+            
         }
 
         return $this->render('pessoa/edit.html.twig', [

@@ -140,7 +140,7 @@ class PessoaType extends AbstractType
 
         // 3. Add 2 evet listeners
         $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'));
-        // $builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
 
     }
 
@@ -168,22 +168,17 @@ class PessoaType extends AbstractType
         
     }
 
-    // public function onPreSubmit(FormEvent $event)
-    // {
+    public function onPreSubmit(FormEvent $event)
+    {
 
-    //     $form = $event->getForm();
-    //     $data = $event->getData();
-
-    //     var_dump($data);
-    //     exit;
+        $form = $event->getForm();
+        $data = $event->getData();
         
-    //     if (isset($data['fkCidadeId'])) {
-    //         $estado = $this->em->getRepository(Cidade::class)->findOneById($data['fkCidadeId']);
-    //     }
+        if (isset($data['fkCidadeId'])) {
+            $data['fkCidadeId'] = $this->em->getRepository(Cidade::class)->findOneById($data['fkCidadeId']);
+        }
         
-    //     // $this->addElements($form, $estado);
-        
-    // }
+    }
 
     public function onPreSetData(FormEvent $event) 
     {

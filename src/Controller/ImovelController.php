@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * @Route("/imovel")
@@ -32,15 +33,27 @@ class ImovelController extends AbstractController
     {
         $imovel = new Imovel();
         $form = $this->createForm(ImovelType::class, $imovel);
-        $form->handleRequest($request);
+     
+        try{
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($imovel);
-            $entityManager->flush();
+            if ($request->isMethod('POST')) {
 
-            return $this->redirectToRoute('imovel_index');
-        }
+                $form->handleRequest($request);
+                
+                $entityManager = $this->getDoctrine()->getManager();
+
+                $imovel->setStatusData(new \DateTime());
+
+                $entityManager->persist($imovel);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('imovel_index');
+
+            }
+        }catch (\Exception $e){
+            throw new Exception($e->getMessage());
+        } 
+
 
         return $this->render('imovel/new.html.twig', [
             'imovel' => $imovel,
@@ -63,15 +76,27 @@ class ImovelController extends AbstractController
      */
     public function edit(Request $request, Imovel $imovel): Response
     {
+        $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(ImovelType::class, $imovel);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        if ($request->isMethod('POST')) {
 
-            return $this->redirectToRoute('imovel_index');
+            $form->handleRequest($request);
+
+            try{
+
+                $imovel->setStatusData(new \DateTime());
+                $em->merge($imovel);
+	    		$em->flush();
+
+                return $this->redirectToRoute('imovel_index');
+
+            }catch (\Exception $e){
+                throw new Exception($e->getMessage());
+            }
+
         }
-
+        
         return $this->render('imovel/edit.html.twig', [
             'imovel' => $imovel,
             'form' => $form->createView(),

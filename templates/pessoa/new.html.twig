@@ -5,8 +5,6 @@
 {% block body %}
     <h1>Create new Pessoa</h1>
 
-{# <form class="form-horizontal form-padding" action="{{ path('pessoa_new') }}" method="post"> #}
-
     {{ include('pessoa/_form.html.twig') }}
 
     <a href="{{ path('pessoa_index') }}">back to list</a>
