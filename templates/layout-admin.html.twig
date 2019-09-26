@@ -55,19 +55,19 @@
                                 <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right panel-default">
                                     <ul class="head-list">
                                         <li>
-                                            <a href="#">
+                                            <a href="{{ path('pessoa_show', {'id': app.user.id }) }}">
                                                 <i class="ti-user icon-lg icon-fw"></i>
-                                                Profile</a>
+                                                Perfil</a>
                                         </li>
                                         <li>
-                                            <a href="#">
-                                                <i class="ti-settings icon-lg icon-fw"></i>
-                                                Settings</a>
+                                            <a href="{{ path('user_trocar_senha', {'id': app.user.id }) }}">
+                                                <i class="ti-key icon-lg icon-fw"></i>
+                                                Trocar senha</a>
                                         </li>
                                         <li>
                                             <a href="{{ path('app_logout') }}">
                                                 <i class="ti-unlock icon-lg icon-fw"></i>
-                                                Logout</a>
+                                                Sair</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -101,13 +101,7 @@
 
                             <div class="panel-body">
 
-                                {% block body %}
-                                    <h4 class="pad-top">Título</h4>
-                                    <hr>
-                                    <div class="">
-                                        Imagine aqui um monte de texto bonito
-                                    </div>
-                                {% endblock %}
+                                {% block body %}{% endblock %}
 
                             </div>
                         </div>

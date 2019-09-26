@@ -26,7 +26,7 @@
                 <td>{{ pessoa.telefonePrincipal }}</td>
                 <td>
                     <a href="{{ path('user_show', {'id': pessoa.id}) }}">show</a>
-                    {# <a href="{{ path('user_edit', {'id': pessoa.id}) }}">edit</a> #}
+                    <a href="{{ path('user_edit', {'id': pessoa.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

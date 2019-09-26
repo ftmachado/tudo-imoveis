@@ -1,0 +1,36 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title %}Seu perfil{% endblock %}
+
+{% block body %}
+    <h1>Seu perfil</h1>
+
+<form class="form-horizontal form-padding" method="POST">
+
+    {# <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="password-atual">Senha atual</label>
+        <div class="col-md-4">
+            <input id="password-atual" name="trocar_senha[password_atual]" type="password" class="form-control old-password" minlength="6" maxlength="20" aria-required="true" required>
+        </div>
+    </div> #}
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.password.first.vars['id'] }}">Senha</label>
+        <div class="col-md-4">
+            {{ form_widget(form.password.first) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.password.second.vars['id'] }}">Repita a senha</label>
+        <div class="col-md-4">
+            {{ form_widget(form.password.second) }}
+        </div>
+    </div>
+    
+    <button class="btn">Salvar</button>
+</form>
+
+{% endblock %}
+
+{% block extrajavascript %}{% endblock %}

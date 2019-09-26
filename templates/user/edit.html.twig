@@ -1,24 +1,30 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block title %}Edit Pessoa{% endblock %}
+{% block title %}Edit Usuário{% endblock %}
+
+{% block extracss %}
+<style>
+.label{
+    font-size: small;
+}
+</style>
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Pessoa</h1>
+    <h1>Edit Usuário</h1>
 
-    {# <form class="form-horizontal form-padding" action="{{ path('pessoa_edit', { 'id': entity.id }) }}" method="post"> #}
+    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
 
-    {{ include('pessoa/_form.html.twig', {'button_label': 'Update'}) }}
+    <a href="{{ path('user_index') }}">back to list</a>
 
-    <a href="{{ path('pessoa_index') }}">back to list</a>
-
-    {{ include('pessoa/_delete_form.html.twig') }}
+    {{ include('user/_delete_form.html.twig') }}
 {% endblock %}
 
 {% block extrajavascript %}
 <script type="text/javascript">
     $(document).ready( function() {
         
-        $("#pessoa_fkEstadoId").on('change', function(){
+        $("#user_fkEstadoId").on('change', function(){
             
             if (this.value != ''){
 
@@ -36,7 +42,7 @@
                         options += '<option value="'+item['id']+'">'+item['nome']+'</option>';
                     });
                     
-                    $("#pessoa_fkCidadeId").empty().append(options);
+                    $("#user_fkCidadeId").empty().append(options);
 
                 }).fail(function(){
                     console.log( 'Falha ao buscar as cidades.' );

@@ -4,6 +4,7 @@
 
 {% block body %}
     <h1>Novo cadastro de usuários</h1>
+    <p><span class="label label-default">O usuário será criado com a senha temporária: imob@2019</span></p>
 
     {{ include('user/_form.html.twig') }}
 
@@ -13,7 +14,7 @@
 {% block extrajavascript %}
 <script type="text/javascript">
     $(document).ready( function() {
-        // Ao mudar o estado, busca as cidades referentes ao estado selecionado
+        
         $("#user_fkEstadoId").on('change', function(){
 
             $.ajax({

@@ -50,6 +50,7 @@ class PessoaFixtures extends Fixture implements OrderedFixtureInterface
                 $pessoa->setUsuario($item['usuario']);
                 $pessoa->setEmail($item['email']);
                 $pessoa->setPassword($this->passwordEncoder->encodePassword($pessoa,$item['password']));
+                $pessoa->setRoles(['ROLE_ADMIN']);
                 $pessoa->setCliente($item['cliente']);
                 $pessoa->setAdministrador($item['administrador']);
                 
@@ -65,6 +66,7 @@ class PessoaFixtures extends Fixture implements OrderedFixtureInterface
                 $pessoa->setUsuario($item['usuario']);
                 $pessoa->setEmail($item['email']);
                 $pessoa->setPassword($this->passwordEncoder->encodePassword($pessoa,$item['password']));
+                $pessoa->setRoles(['ROLE_ADMIN']);
                 $pessoa->setCliente($item['cliente']);
                 $pessoa->setAdministrador($item['administrador']);
 
