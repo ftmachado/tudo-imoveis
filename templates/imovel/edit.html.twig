@@ -2,7 +2,9 @@
 
 {% block extracss %}
 <style>
-    .dz-image img{width: 100%;height: 100%;}
+    .dz-image img{
+        height: 120px;
+    }
 </style>
 {% endblock %}
 
@@ -28,7 +30,7 @@
         </div>
     </form>
 
-    <button id="save" class="btn btn-primary" type="submit">{{ button_label|default('Save') }}</button>
+    <button id="save" class="btn btn-primary" type="submit">{{ button_label|default('Update') }}</button>
 
     <a href="{{ path('imovel_index') }}">back to list</a>
 
@@ -69,7 +71,6 @@
             });
 
             this.on("removedfile", function(file) {
-                console.log(file);
 
                 $.ajax({
                     url: "{{ path('file_delete') }}",

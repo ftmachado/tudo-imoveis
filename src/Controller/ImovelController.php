@@ -47,6 +47,16 @@ class ImovelController extends AbstractController
                 $entityManager->persist($imovel);
                 $entityManager->flush();
 
+                /*
+                * Verifica se existe um diretório temp e renomeia para ID
+                */
+                $oldpath = "./uploads/temp/";
+                $newpath = "./uploads/".$imovel->getId()."/";
+
+                if (is_dir($oldpath)) {
+                    rename($oldpath, $newpath);
+                }
+
                 return $this->redirectToRoute('imovel_index');
 
             }
@@ -109,6 +119,16 @@ class ImovelController extends AbstractController
      */
     public function delete(Request $request, Imovel $imovel): Response
     {
+
+        $removepath = "./uploads/".$imovel->getId()."/";
+        
+        if (!is_dir($removepath)) {
+            // throw new InvalidArgumentException("$removepath não é um diretório");
+        } else {
+            array_map('unlink', glob($removepath."*.*"));
+            rmdir($removepath);
+        }
+
         if ($this->isCsrfTokenValid('delete'.$imovel->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($imovel);

@@ -7,12 +7,58 @@
 
     {{ include('imovel/_form.html.twig') }}
 
+    <form id="form-dropzone" action="{{ path('file_input') }}" class="dropzone">
+        <div class="dz-default dz-message">
+            <div class="dz-icon">
+                <i class="ti-cloud-up icon-5x"></i>
+            </div>
+            <div>
+                <span class="dz-text">Drop files to upload</span>
+                <p class="text-sm text-muted">or click to pick manually</p>
+            </div>
+        </div>
+        <div class="fallback">
+            <input name="file[]" type="file" multiple>
+        </div>
+    </form>
+
+    <button id="save" class="btn btn-primary" type="submit">{{ button_label|default('Save') }}</button>
+
     <a href="{{ path('imovel_index') }}">back to list</a>
 
 {% endblock %}
 
 {% block extrajavascript %}
 <script type="text/javascript">
+
+    /*
+    * Fonte: https://github.com/enyo/dropzone/wiki/Combine-normal-form-with-Dropzone
+    * https://stackoverflow.com/questions/17872417/integrating-dropzone-js-into-existing-html-form-with-other-fields
+    * https://gist.github.com/lokomotivan/51cc70bb5e93829f673deb8fcfcac34d
+    * https://stackoverflow.com/questions/29517885/get-dropzone-instance-object-using-jquery
+    */
+
+    Dropzone.options.formDropzone = {
+        autoProcessQueue: false,
+        uploadMultiple: true,
+        parallelUploads: 10,
+        maxFiles: 10,
+        maxFileSize : 4, //MB
+        addRemoveLinks : true,
+        acceptedFiles: ".jpg, .jpeg, .png, .gif",
+        // Gets triggered when the form is actually being sent.
+        sendingmultiple: function() {
+            $('#form-dropzone').addClass('form-loading');
+        },
+        // Gets triggered when the files have successfully been sent.
+        successmultiple: function(files, response) {
+        },
+        // Gets triggered when there was an error sending the files.
+        errormultiple: function(files, response) {
+        }
+
+    };
+
     $(document).ready( function() {
         
         $("#imovel_fkEstadoId").on('change', function(){
@@ -39,10 +85,19 @@
 
         });
 
-        // $('input[type="submit"]').on('click', function submitForms(){
-        //     $('#form-imovel').submit();
-        //     $('#form-dropzone').submit();
-        // });
+        var myDropzone = Dropzone.forElement('#form-dropzone');
+
+        $('#save').on('click', function (e){
+
+            if (myDropzone.files.length == 0) {
+                $('#form-imovel').submit();
+            } else {
+                myDropzone.processQueue();
+                $('#form-imovel').submit();
+            }
+
+        });
+
     });
 </script>
 {% endblock %}
