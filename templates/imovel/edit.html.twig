@@ -1,5 +1,11 @@
 {% extends 'layout-admin.html.twig' %}
 
+{% block extracss %}
+<style>
+    .dz-image img{width: 100%;height: 100%;}
+</style>
+{% endblock %}
+
 {% block title %}Edit Imovel{% endblock %}
 
 {% block body %}
@@ -38,20 +44,10 @@
 
     Dropzone.options.formDropzone = {
         maxFileSize : 4, //MB
-        parallelUploads : 10,
+        maxFiles: 10,
         uploadMultiple: false,
         addRemoveLinks : true,
         acceptedFiles: ".jpg, .jpeg, .png, .gif",
-        // resize: function(file) {
-        //     return {
-        //         srcX: 0,
-        //         srcY: 0,
-        //         srcWidth: file.width,
-        //         srcHeight: file.height,
-        //         trgWidth: 160,
-        //         trgHeight: 120,
-        //     };
-        // },
         init: function() {
 
             var thisDropzone = this;
@@ -60,14 +56,28 @@
 
                 $.each(data, function(key,value){
 
-                    console.log(value);
+                    // here we get the file name and size as response 
+                    var mockFile = { name: value.name, size: value.size };
 
-                    var mockFile = { name: value.name, size: value.size }; // here we get the file name and size as response 
+                    thisDropzone.emit("addedfile", mockFile);
+                    thisDropzone.emit("thumbnail", mockFile, value.file);
+                    thisDropzone.emit("complete", mockFile);
+                    thisDropzone.options.maxFiles = thisDropzone.options.maxFiles - data.length;
 
-                    thisDropzone.options.addedfile.call(thisDropzone, mockFile);
+                });
 
-                    thisDropzone.options.thumbnail.call(thisDropzone, mockFile, value.file);
+            });
 
+            this.on("removedfile", function(file) {
+                console.log(file);
+
+                $.ajax({
+                    url: "{{ path('file_delete') }}",
+                    type: "POST",
+                    data: {
+                        'id': "{{app.request.get('id')}}",
+                        'fileName': file.name
+                    }
                 });
 
             });

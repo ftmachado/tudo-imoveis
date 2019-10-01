@@ -76,4 +76,23 @@ class DropzoneController extends AbstractController
                 
     }
 
+    /**
+     * Move um arquivo por vez
+     * @Route("/admin/file-delete", name="file_delete")
+     */
+    public function delete()
+    {
+        $id = $_POST['id'];
+        $fileName = $_POST['fileName'];
+
+        if (is_null($fileName || is_null($id))) {
+            return new JsonResponse("Id ou Nome de arquivo não informado", JsonResponse::HTTP_BAD_REQUEST);
+        }
+
+        $basepath = "./uploads/".$id."/";
+
+        unlink($basepath.$fileName);
+
+    }
+
 }
