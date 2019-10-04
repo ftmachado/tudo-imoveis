@@ -1,0 +1,51 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title %}New Bairro{% endblock %}
+
+{% block body %}
+    <h1>Create new Bairro</h1>
+
+    {{ include('bairro/_form.html.twig') }}
+
+    <a href="{{ path('bairro_index') }}">back to list</a>
+{% endblock %}
+
+{% block extrajavascript %}
+<script type="text/javascript">
+
+    function carregaCidades(estadoId) {
+            
+        $.ajax({
+            type: "POST",
+            url: "{{ path('pessoa_lista_cidades') }}",
+            cache: false,
+            data: {
+                'estadoId': estadoId
+            }
+        }).done(function(cities) {
+
+            let options = '';
+            $.each(cities, function(i, item){
+                options += '<option value="'+item['id']+'">'+item['nome']+'</option>';
+            });
+            
+            $("#bairro_fkCidadeId").empty().append(options);
+
+        }).fail(function(){
+            console.log( 'Falha ao buscar as cidades.' );
+        });
+
+    }
+
+    $(document).ready( function() {
+
+        carregaCidades($("#bairro_fkEstadoId").val());
+        
+        $("#bairro_fkEstadoId").on('change', function(){
+            carregaCidades(this.value);
+        });
+
+    });
+
+</script>
+{% endblock %}

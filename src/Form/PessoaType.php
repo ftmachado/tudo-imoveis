@@ -6,6 +6,7 @@ use App\Entity\Pessoa;
 use App\Entity\Estado;
 use App\Entity\Cidade;
 use App\Entity\Bairro;
+use App\Repository\BairroRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -126,6 +127,21 @@ class PessoaType extends AbstractType
             ->add('fkBairroId', EntityType::class, [
                 'class' => Bairro::class,
                 'choice_label' => 'nome',
+                'query_builder' => function (BairroRepository $er) use ($options) {
+
+                    if ($options['data']->getFkCidadeId()) {
+                        
+                        return $er->createQueryBuilder('b')
+                            ->where('b.fkCidadeId = :cidade')
+                            ->setParameter('cidade', $options['data']->getFkCidadeId()->getId())
+                            ->orderBy('b.nome', 'ASC');
+
+                    } else {
+                        return $er->createQueryBuilder('b')
+                            ->where('b.id = 0');
+                    }
+                    
+                },
                 'attr' => [
                     'class' => 'form-control',
                 ]
@@ -140,7 +156,6 @@ class PessoaType extends AbstractType
 
         // 3. Add 2 evet listeners
         $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'));
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
 
     }
 
@@ -158,25 +173,12 @@ class PessoaType extends AbstractType
         $form->add('fkCidadeId', EntityType::class, [
             'class' => Cidade::class,
             'choices' => $cidades,
-            'required' => false,
+            'required' => true,
             'choice_label' => 'nome',
-            'placeholder' => 'Selecione um estado',
             'attr' => [
                 'class' => 'form-control'
             ]
         ]);
-        
-    }
-
-    public function onPreSubmit(FormEvent $event)
-    {
-
-        $form = $event->getForm();
-        $data = $event->getData();
-        
-        if (isset($data['fkCidadeId'])) {
-            $data['fkCidadeId'] = $this->em->getRepository(Cidade::class)->findOneById($data['fkCidadeId']);
-        }
         
     }
 

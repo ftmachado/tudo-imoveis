@@ -28,6 +28,12 @@ class Bairro
      */
     private $fkCidadeId;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Estado")
+     * @ORM\JoinColumn(name="fk_estado_id")
+     */
+    private $fkEstadoId;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -53,6 +59,18 @@ class Bairro
     public function setFkCidadeId(?Cidade $fkCidadeId): self
     {
         $this->fkCidadeId = $fkCidadeId;
+
+        return $this;
+    }
+
+    public function getFkEstadoId(): ?Estado
+    {
+        return $this->fkEstadoId;
+    }
+
+    public function setFkEstadoId(?Estado $fkEstadoId): self
+    {
+        $this->fkEstadoId = $fkEstadoId;
 
         return $this;
     }

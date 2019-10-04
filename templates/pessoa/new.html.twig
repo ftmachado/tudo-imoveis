@@ -37,6 +37,30 @@
             });
 
         });
+
+        $("#pessoa_fkCidadeId").on('change', function(){
+
+            $.ajax({
+                type: "POST",
+                url: "{{ path('pessoa_lista_bairros') }}",
+                cache: false,
+                data: {
+                    'cidadeId': this.value
+                }
+            }).done(function(bairros) {
+
+                let options = '';
+                $.each(bairros, function(i, item){
+                    options += '<option value="'+item['id']+'">'+item['nome']+'</option>';
+                });
+                
+                $("#pessoa_fkBairroId").empty().append(options);
+
+            }).fail(function(){
+                console.log( 'Falha ao buscar as cidades.' );
+            });
+
+        });
     });
 </script>
 {% endblock %}

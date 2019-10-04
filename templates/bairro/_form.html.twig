@@ -1,0 +1,26 @@
+<form class="form-horizontal form-padding" method="post">
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.fkEstadoId.vars['id'] }}">Estado</label>
+        <div class="col-md-4">
+            {{ form_widget(form.fkEstadoId) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.fkCidadeId.vars['id'] }}">Cidade</label>
+        <div class="col-md-4">
+            {{ form_widget(form.fkCidadeId) }}
+        </div>
+    </div>
+
+    <div class="form-group form-message-light">
+        <label class="col-md-3 control-label" for="{{ form.nome.vars['id'] }}">Nome</label>
+        <div class="col-md-4">
+            {{ form_widget(form.nome) }}
+        </div>
+    </div>
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+
+</form>

@@ -137,4 +137,36 @@ class ImovelController extends AbstractController
 
         return $this->redirectToRoute('imovel_index');
     }
+
+    /** 
+     * @Route("/listacidades", name="imovel_lista_cidades_atuacao", methods={"POST"})
+     */
+	public function listaCidadesAtuacao(Request $request)
+	{
+
+		$em = $this->getDoctrine()->getManager();
+		
+		$estadoId  = $request->request->get('estadoId');
+        $estado = $em->getRepository(Estado::class)->findOneById($estadoId);
+
+		if (!$estado) {
+			throw $this->createNotFoundException('Estado não encontrado na requisição.');
+		}
+        
+        $cidades = $em->getRepository(Cidade::class)->findCidadeAtuacao($estado->getId());
+        
+		$retorno = [];
+        foreach($cidades as $c){
+
+            $retorno[] = [
+                'id' => $c->getId(),
+                'nome' => $c->getNome()
+            ];
+            
+        }
+		
+		return new JsonResponse($retorno, JsonResponse::HTTP_OK);
+
+    }
+    
 }

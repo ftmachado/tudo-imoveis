@@ -1,0 +1,39 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title %}Bairro index{% endblock %}
+
+{% block body %}
+    <h1>Bairro index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Estado</th>
+                <th>Cidade</th>
+                <th>Nome</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bairro in bairros %}
+            <tr>
+                <td>{{ bairro.id }}</td>
+                <td>{{ bairro.fkEstadoId.nome }}</td>
+                <td>{{ bairro.fkCidadeId.nome }}</td>
+                <td>{{ bairro.nome }}</td>
+                <td>
+                    <a href="{{ path('bairro_show', {'id': bairro.id}) }}">show</a>
+                    <a href="{{ path('bairro_edit', {'id': bairro.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bairro_new') }}">Create new</a>
+{% endblock %}

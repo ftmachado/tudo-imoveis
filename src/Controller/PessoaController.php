@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Pessoa;
 use App\Entity\Estado;
 use App\Entity\Cidade;
+use App\Entity\Bairro;
 use App\Form\PessoaType;
 use App\Repository\PessoaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,9 +42,12 @@ class PessoaController extends AbstractController
             if ($request->isMethod('POST')) {
 
                 $form->handleRequest($request);
+                $data = $request->request->all();
 
                 $entityManager = $this->getDoctrine()->getManager();
-                
+
+                $pessoa->setFkCidadeId($entityManager->getRepository(Cidade::class)->findOneById($data['pessoa']['fkCidadeId']));
+                $pessoa->setFkBairroId($entityManager->getRepository(Bairro::class)->findOneById($data['pessoa']['fkBairroId']));
                 $pessoa->setPassword("");
                 $pessoa->setCliente(true);
                 $pessoa->setAdministrador(false);
@@ -141,7 +145,7 @@ class PessoaController extends AbstractController
 			throw $this->createNotFoundException('Estado não encontrado na requisição.');
 		}
         
-        $cidades = $em->getRepository(Cidade::class)->findCidadeAtuacao($estado->getId());
+        $cidades = $em->getRepository(Cidade::class)->findBy(['fkEstadoId' => $estado->getId()]);
         
 		$retorno = [];
         foreach($cidades as $c){
@@ -155,5 +159,37 @@ class PessoaController extends AbstractController
 		
 		return new JsonResponse($retorno, JsonResponse::HTTP_OK);
 
-	}
+    }
+    
+    /** 
+     * @Route("/listabairros", name="pessoa_lista_bairros", methods={"POST"})
+     */
+	public function listaBairros(Request $request)
+	{
+
+		$em = $this->getDoctrine()->getManager();
+		
+		$cidadeId  = $request->request->get('cidadeId');
+        $bairro = $em->getRepository(Cidade::class)->findOneById($cidadeId);
+
+		if (!$bairro) {
+			throw $this->createNotFoundException('Cidade não encontrada na requisição.');
+		}
+        
+        $bairros = $em->getRepository(Bairro::class)->findBy(['fkCidadeId' => $bairro->getId()]);
+        
+		$retorno = [];
+        foreach($bairros as $c){
+
+            $retorno[] = [
+                'id' => $c->getId(),
+                'nome' => $c->getNome()
+            ];
+            
+        }
+		
+		return new JsonResponse($retorno, JsonResponse::HTTP_OK);
+
+    }
+    
 }
