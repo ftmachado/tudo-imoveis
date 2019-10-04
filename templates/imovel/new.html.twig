@@ -59,16 +59,14 @@
 
     };
 
-    $(document).ready( function() {
-        
-        $("#imovel_fkEstadoId").on('change', function(){
-
+    function carregaCidades(estadoId) {
+            
             $.ajax({
                 type: "POST",
                 url: "{{ path('pessoa_lista_cidades') }}",
                 cache: false,
                 data: {
-                    'estadoId': this.value
+                    'estadoId': estadoId
                 }
             }).done(function(cities) {
 
@@ -83,6 +81,14 @@
                 console.log( 'Falha ao buscar as cidades.' );
             });
 
+    }
+
+    $(document).ready( function() {
+
+        carregaCidades($("#imovel_fkEstadoId").val());
+        
+        $("#imovel_fkEstadoId").on('change', function(){
+            carregaCidades(this.value);
         });
 
         var myDropzone = Dropzone.forElement('#form-dropzone');

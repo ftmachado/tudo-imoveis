@@ -141,7 +141,7 @@ class PessoaController extends AbstractController
 			throw $this->createNotFoundException('Estado não encontrado na requisição.');
 		}
         
-        $cidades = $em->getRepository(Cidade::class)->findByFkEstadoId($estado->getId());
+        $cidades = $em->getRepository(Cidade::class)->findCidadeAtuacao($estado->getId());
         
 		$retorno = [];
         foreach($cidades as $c){

@@ -8,6 +8,9 @@ use App\Entity\Pessoa;
 use App\Entity\Estado;
 use App\Entity\Cidade;
 use App\Entity\Bairro;
+use App\Entity\ImobiliariaAtuacao;
+use App\Repository\EstadoRepository;
+use App\Repository\CidadeRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -194,18 +197,15 @@ class ImovelType extends AbstractType
             ->add('fkEstadoId', EntityType::class, [
                 'class' => Estado::class,
                 'choice_label' => 'nome',
+                'query_builder' => function (EstadoRepository $er) {
+                    return $er->createQueryBuilder('e')
+                        ->innerJoin(ImobiliariaAtuacao::class, 'i', 'WITH', 'e.id = i.fkEstadoId')
+                        ->orderBy('e.nome', 'ASC');
+                },
                 'attr' => [
                     'class' => 'form-control',
                 ]
             ])
-
-            // ->add('fkCidadeId', EntityType::class, [
-            //     'class' => Cidade::class,
-            //     'choice_label' => 'nome',
-            //     'attr' => [
-            //         'class' => 'form-control',
-            //     ]
-            // ])
 
             ->add('fkBairroId', EntityType::class, [
                 'class' => Bairro::class,
@@ -238,7 +238,7 @@ class ImovelType extends AbstractType
 
         //Se houver um estado armazenado carrega as cidades corretas
         if ($e) {
-            $cidades = $this->em->getRepository(Cidade::class)->findBy(['fkEstadoId' => $e->getId()]);
+            $cidades = $this->em->getRepository(Cidade::class)->findCidadeAtuacao($e->getId());
         }
 
         $form->add('fkCidadeId', EntityType::class, [
@@ -246,7 +246,6 @@ class ImovelType extends AbstractType
             'choices' => $cidades,
             'required' => false,
             'choice_label' => 'nome',
-            'placeholder' => 'Selecione um estado',
             'attr' => [
                 'class' => 'form-control'
             ]

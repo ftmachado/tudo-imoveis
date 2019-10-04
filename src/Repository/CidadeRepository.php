@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Cidade;
+use App\Entity\ImobiliariaAtuacao;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -19,22 +20,19 @@ class CidadeRepository extends ServiceEntityRepository
         parent::__construct($registry, Cidade::class);
     }
 
-    // /**
-    //  * @return Cidade[] Returns an array of Cidade objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Cidade[] Returns an array of Cidade objects
+     */
+    public function findCidadeAtuacao($estado)
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            ->innerJoin(ImobiliariaAtuacao::class, 'i', 'WITH', 'c.id = i.fkCidadeId')
+            ->andWhere('i.fkEstadoId = :estado')
+            ->setParameter(':estado', $estado)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Cidade
