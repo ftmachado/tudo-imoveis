@@ -1,13 +1,13 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block breadcrumb %}New Bairro{% endblock %}
+{% block breadcrumb %}Cadastrar bairro{% endblock %}
 
 {% block body %}
-    <h1>Create new Bairro</h1>
+    <h3>Novo bairro</h3>
 
     {{ include('bairro/_form.html.twig') }}
 
-    <a href="{{ path('bairro_index') }}">Voltar</a>
+    <a class="btn btn-default btn-rounded" href="{{ path('bairro_index') }}">Voltar</a>
 {% endblock %}
 
 {% block extrajavascript %}

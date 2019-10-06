@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Bairro;
+use App\Entity\Cidade;
 use App\Form\BairroType;
 use App\Repository\BairroRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/bairro")
@@ -18,10 +21,16 @@ class BairroController extends AbstractController
     /**
      * @Route("/", name="bairro_index", methods={"GET"})
      */
-    public function index(BairroRepository $bairroRepository): Response
+    public function index(BairroRepository $bairroRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $page = $request->query->getInt('page',1);
+
+        $bairros = $bairroRepository->findAll();
+
+        $bairros = $paginator->paginate($bairros, $page, 15);
+
         return $this->render('bairro/index.html.twig', [
-            'bairros' => $bairroRepository->findAll(),
+            'bairros' => $bairros,
         ]);
     }
 
@@ -38,8 +47,11 @@ class BairroController extends AbstractController
             if ($request->isMethod('POST')) {
 
                 $form->handleRequest($request);
-                
                 $entityManager = $this->getDoctrine()->getManager();
+
+                $cidadeId = $request->request->get('bairro')['fkCidadeId'];
+                $bairro->setFkCidadeId( $entityManager->getRepository(Cidade::class)->findOneById($cidadeId) );
+                
                 $entityManager->persist($bairro);
                 $entityManager->flush();
 
@@ -56,15 +68,15 @@ class BairroController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="bairro_show", methods={"GET"})
-     */
-    public function show(Bairro $bairro): Response
-    {
-        return $this->render('bairro/show.html.twig', [
-            'bairro' => $bairro,
-        ]);
-    }
+    // /**
+    //  * @Route("/{id}", name="bairro_show", methods={"GET"})
+    //  */
+    // public function show(Bairro $bairro): Response
+    // {
+    //     return $this->render('bairro/show.html.twig', [
+    //         'bairro' => $bairro,
+    //     ]);
+    // }
 
     /**
      * @Route("/{id}/edit", name="bairro_edit", methods={"GET","POST"})

@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/admin/imovel")
@@ -19,10 +20,16 @@ class ImovelController extends AbstractController
     /**
      * @Route("/", name="imovel_index", methods={"GET"})
      */
-    public function index(ImovelRepository $imovelRepository): Response
+    public function index(ImovelRepository $imovelRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $page = $request->query->getInt('page',1);
+
+        $imoveis = $imovelRepository->findAll();
+
+        $imoveis = $paginator->paginate($imoveis, $page, 15);
+
         return $this->render('imovel/index.html.twig', [
-            'imovels' => $imovelRepository->findAll(),
+            'imovels' => $imoveis,
         ]);
     }
 

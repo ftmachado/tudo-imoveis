@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/admin/tipo-imovel")
@@ -18,10 +19,16 @@ class TipoImovelController extends AbstractController
     /**
      * @Route("/", name="tipo_imovel_index", methods={"GET"})
      */
-    public function index(TipoImovelRepository $tipoImovelRepository): Response
+    public function index(TipoImovelRepository $tipoImovelRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $page = $request->query->getInt('page',1);
+
+        $tipo = $tipoImovelRepository->findAll();
+
+        $tipo = $paginator->paginate($tipo, $page, 15);
+
         return $this->render('tipo_imovel/index.html.twig', [
-            'tipo_imovels' => $tipoImovelRepository->findAll(),
+            'tipo_imovels' => $tipo,
         ]);
     }
 

@@ -33,7 +33,9 @@
         {% endfor %}
         </tbody>
     </table>
-
+    <div class="navigation">
+        {{ knp_pagination_render(imobiliaria_atuacaos) }}
+    </div>
     <div>
         <a class="btn btn-dark btn-rounded" href="{{ path('imobiliaria_atuacao_new') }}">Cadastrar</a>
     </div>

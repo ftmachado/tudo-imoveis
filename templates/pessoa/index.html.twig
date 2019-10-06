@@ -35,6 +35,9 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="navigation">
+        {{ knp_pagination_render(pessoas) }}
+    </div>
     <div class="">
         <a class="btn btn-dark btn-rounded" href="{{ path('pessoa_new') }}">Cadastrar</a>
     </div>

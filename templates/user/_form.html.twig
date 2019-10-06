@@ -1,103 +1,114 @@
 <form class="form-horizontal form-padding" method="post">
 
-    <div class="form-group form-message-light">
-        <label class="col-md-3 control-label" for="{{ form.nome.vars['id'] }}">Nome</label>
-        <div class="col-md-4">
-            {{ form_widget(form.nome) }}
-        </div>
-    </div>
+    <fieldset>
+        <legend>Informações Pessoais</legend>
 
-    <div class="form-group form-message-light">
-        <label class="col-md-3 control-label" for="{{ form.email.vars['id'] }}">E-mail</label>
-        <div class="col-md-4">
-            {{ form_widget(form.email) }}
+        <div class="form-group form-message-light">
+            <label class="col-md-3 control-label" for="{{ form.nome.vars['id'] }}">Nome</label>
+            <div class="col-md-4">
+                {{ form_widget(form.nome) }}
+            </div>
         </div>
-    </div>
 
-    <div class="form-group form-message-light">
-        <label class="col-md-3 control-label" for="{{ form.cpf.vars['id'] }}">CPF</label>
-        <div class="col-md-4">
-            {{ form_widget(form.cpf) }}
+        <div class="form-group form-message-light">
+            <label class="col-md-3 control-label" for="{{ form.email.vars['id'] }}">E-mail</label>
+            <div class="col-md-4">
+                {{ form_widget(form.email) }}
+            </div>
         </div>
-    </div>
 
-    <div class="form-group form-message-light">
-        <label class="col-md-3 control-label" for="{{ form.rg.vars['id'] }}">RG</label>
-        <div class="col-md-4">
-            {{ form_widget(form.rg) }}
+        <div class="form-group form-message-light">
+            <label class="col-md-3 control-label" for="{{ form.cpf.vars['id'] }}">CPF</label>
+            <div class="col-md-4">
+                {{ form_widget(form.cpf) }}
+            </div>
         </div>
-    </div>
 
-    <div class="form-group form-message-light">
-        <label class="col-md-3 control-label" for="{{ form.telefonePrincipal.vars['id'] }}">Telefone Principal</label>
-        <div class="col-md-4">
-            {{ form_widget(form.telefonePrincipal) }}
+        <div class="form-group form-message-light">
+            <label class="col-md-3 control-label" for="{{ form.rg.vars['id'] }}">RG</label>
+            <div class="col-md-4">
+                {{ form_widget(form.rg) }}
+            </div>
         </div>
-    </div>
 
-    <div class="form-group form-message-light">
-        <label class="col-md-3 control-label" for="{{ form.telefoneSecundario.vars['id'] }}">Telefone Secundario</label>
-        <div class="col-md-4">
-            {{ form_widget(form.telefoneSecundario) }}
+        <div class="form-group form-message-light">
+            <label class="col-md-3 control-label" for="{{ form.telefonePrincipal.vars['id'] }}">Telefone Principal</label>
+            <div class="col-md-4">
+                {{ form_widget(form.telefonePrincipal) }}
+            </div>
         </div>
-    </div>
 
-    <div class="form-group form-message-light">
-        <label class="col-md-3 control-label" for="{{ form.usuario.vars['id'] }}">Usuário</label>
-        <div class="col-md-4">
-            {{ form_widget(form.usuario) }}
+        <div class="form-group form-message-light">
+            <label class="col-md-3 control-label" for="{{ form.telefoneSecundario.vars['id'] }}">Telefone Secundário</label>
+            <div class="col-md-4">
+                {{ form_widget(form.telefoneSecundario) }}
+            </div>
         </div>
-    </div>
 
-    <div class="form-group form-message-light">
-        <label class="col-md-3 control-label" for="{{ form.endereco.vars['id'] }}">Endereço</label>
-        <div class="col-md-4">
-            {{ form_widget(form.endereco) }}
+        <div class="form-group form-message-light">
+            <label class="col-md-3 control-label" for="{{ form.usuario.vars['id'] }}">Usuário</label>
+            <div class="col-md-4">
+                {{ form_widget(form.usuario) }}
+            </div>
         </div>
-    </div>
 
-    <div class="form-group form-message-light">
-        <label class="col-md-3 control-label" for="{{ form.numero.vars['id'] }}">Número</label>
-        <div class="col-md-4">
-            {{ form_widget(form.numero) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>Endereço</legend>
+
+
+        <div class="form-group form-message-light">
+            <label class="col-md-3 control-label" for="{{ form.endereco.vars['id'] }}">Endereço</label>
+            <div class="col-md-4">
+                {{ form_widget(form.endereco) }}
+            </div>
         </div>
-    </div>
 
-    <div class="form-group form-message-light">
-        <label class="col-md-3 control-label" for="{{ form.cep.vars['id'] }}">CEP</label>
-        <div class="col-md-4">
-            {{ form_widget(form.cep) }}
+        <div class="form-group form-message-light">
+            <label class="col-md-3 control-label" for="{{ form.numero.vars['id'] }}">Número</label>
+            <div class="col-md-4">
+                {{ form_widget(form.numero) }}
+            </div>
         </div>
-    </div>
 
-    <div class="form-group form-message-light">
-        <label class="col-md-3 control-label" for="{{ form.complemento.vars['id'] }}">Complemento</label>
-        <div class="col-md-4">
-            {{ form_widget(form.complemento) }}
+        <div class="form-group form-message-light">
+            <label class="col-md-3 control-label" for="{{ form.cep.vars['id'] }}">CEP</label>
+            <div class="col-md-4">
+                {{ form_widget(form.cep) }}
+            </div>
         </div>
-    </div>
 
-    <div class="form-group form-message-light">
-        <label class="col-md-3 control-label" for="{{ form.fkEstadoId.vars['id'] }}">Estado</label>
-        <div class="col-md-4">
-            {{ form_widget(form.fkEstadoId) }}
+        <div class="form-group form-message-light">
+            <label class="col-md-3 control-label" for="{{ form.complemento.vars['id'] }}">Complemento</label>
+            <div class="col-md-4">
+                {{ form_widget(form.complemento) }}
+            </div>
         </div>
-    </div>
 
-    <div class="form-group form-message-light">
-        <label class="col-md-3 control-label" for="{{ form.fkCidadeId.vars['id'] }}">Cidade</label>
-        <div class="col-md-4">
-            {{ form_widget(form.fkCidadeId) }}
+        <div class="form-group form-message-light">
+            <label class="col-md-3 control-label" for="{{ form.fkEstadoId.vars['id'] }}">Estado</label>
+            <div class="col-md-4">
+                {{ form_widget(form.fkEstadoId) }}
+            </div>
         </div>
-    </div>
 
-    <div class="form-group form-message-light">
-        <label class="col-md-3 control-label" for="{{ form.fkBairroId.vars['id'] }}">Bairro</label>
-        <div class="col-md-4">
-            {{ form_widget(form.fkBairroId) }}
+        <div class="form-group form-message-light">
+            <label class="col-md-3 control-label" for="{{ form.fkCidadeId.vars['id'] }}">Cidade</label>
+            <div class="col-md-4">
+                {{ form_widget(form.fkCidadeId) }}
+            </div>
         </div>
-    </div>
 
-    <button class="btn">{{ button_label|default('Save') }}</button>
+        <div class="form-group form-message-light">
+            <label class="col-md-3 control-label" for="{{ form.fkBairroId.vars['id'] }}">Bairro</label>
+            <div class="col-md-4">
+                {{ form_widget(form.fkBairroId) }}
+            </div>
+        </div>
+
+    </fieldset>
+
+    <button class="btn btn-primary btn-rounded pull-right">{{ button_label|default('Salvar') }}</button>
 
 </form>

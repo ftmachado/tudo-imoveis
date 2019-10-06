@@ -1,14 +1,14 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block breadcrumb %}Novo Usuario{% endblock %}
+{% block breadcrumb %}Cadastrar Usuários{% endblock %}
 
 {% block body %}
-    <h1>Novo cadastro de usuários</h1>
+    <h1>Novo usuário</h1>
     <p><span class="label label-default">O usuário será criado com a senha temporária: imob@2019</span></p>
 
     {{ include('user/_form.html.twig') }}
 
-    <a href="{{ path('user_index') }}">Voltar</a>
+    <a class="btn btn-default btn-rounded" href="{{ path('user_index') }}">Voltar</a>
 {% endblock %}
 
 {% block extrajavascript %}

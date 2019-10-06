@@ -52,7 +52,6 @@ class BairroType extends AbstractType
         
         // 3. Add 2 evet listeners
         $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'));
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
 
     }
 
@@ -76,18 +75,6 @@ class BairroType extends AbstractType
                 'class' => 'form-control'
             ]
         ]);
-        
-    }
-
-    public function onPreSubmit(FormEvent $event)
-    {
-
-        $form = $event->getForm();
-        $data = $event->getData();
-        
-        if (isset($data['fkCidadeId'])) {
-            $data['fkCidadeId'] = $this->em->getRepository(Cidade::class)->findOneById($data['fkCidadeId']);
-        }
         
     }
 

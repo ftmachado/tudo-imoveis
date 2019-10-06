@@ -3,9 +3,12 @@
 {% block breadcrumb %}Seu perfil{% endblock %}
 
 {% block body %}
-    <h1>Seu perfil</h1>
+    <h3>{% if app.user %}{{ app.user.nome }}{% endif %}</h3>
 
 <form class="form-horizontal form-padding" method="POST">
+
+<fieldset>
+    <legend>Alterar senha</legend>
 
     {# <div class="form-group form-message-light">
         <label class="col-md-3 control-label" for="password-atual">Senha atual</label>
@@ -27,8 +30,11 @@
             {{ form_widget(form.password.second) }}
         </div>
     </div>
-    
-    <button class="btn">Salvar</button>
+
+</fieldset>
+    <div>
+        <button class="btn btn-primary btn-rounded pull-right">Salvar</button>
+    </div>
 </form>
 
 {% endblock %}

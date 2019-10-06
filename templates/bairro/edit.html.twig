@@ -1,13 +1,14 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block breadcrumb %}Edit Bairro{% endblock %}
+{% block breadcrumb %}Atualizar bairro{% endblock %}
 
 {% block body %}
-    <h1>Edit Bairro</h1>
+    <h3>Atualizar bairro</h3>
+    {{ include('bairro/_delete_form.html.twig') }}
+    <br>
 
     {{ include('bairro/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('bairro_index') }}">Voltar</a>
+    <a class="btn btn-default btn-rounded" href="{{ path('bairro_index') }}">Voltar</a>
 
-    {{ include('bairro/_delete_form.html.twig') }}
 {% endblock %}

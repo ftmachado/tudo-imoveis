@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/admin/imobiliaria-atuacao")
@@ -20,10 +21,16 @@ class ImobiliariaAtuacaoController extends AbstractController
     /**
      * @Route("/", name="imobiliaria_atuacao_index", methods={"GET"})
      */
-    public function index(ImobiliariaAtuacaoRepository $imobiliariaAtuacaoRepository): Response
+    public function index(ImobiliariaAtuacaoRepository $imobiliariaAtuacaoRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $page = $request->query->getInt('page',1);
+
+        $imoveis = $imobiliariaAtuacaoRepository->findAll();
+
+        $imoveis = $paginator->paginate($imoveis, $page, 15);
+
         return $this->render('imobiliaria_atuacao/index.html.twig', [
-            'imobiliaria_atuacaos' => $imobiliariaAtuacaoRepository->findAll(),
+            'imobiliaria_atuacaos' => $imoveis,
         ]);
     }
 

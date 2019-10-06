@@ -5,6 +5,11 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
 
+knp_paginator:
+    template:
+        pagination: '@KnpPaginator/Pagination/sliding.html.twig'
+        # pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v3_pagination.html.twig'
+
 services:
     # default configuration for services in *this* file
     _defaults:

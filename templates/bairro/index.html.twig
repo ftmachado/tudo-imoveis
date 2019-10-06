@@ -1,9 +1,9 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block breadcrumb %}Bairro index{% endblock %}
+{% block breadcrumb %}Cadastro de bairros{% endblock %}
 
 {% block body %}
-    <h1>Bairro index</h1>
+    <h3>Cadastro de bairros</h3>
 
     <table class="table">
         <thead>
@@ -19,21 +19,24 @@
         {% for bairro in bairros %}
             <tr>
                 <td>{{ bairro.id }}</td>
-                <td>{{ bairro.fkEstadoId.nome }}</td>
-                <td>{{ bairro.fkCidadeId.nome }}</td>
+                <td>{% if bairro.fkEstadoId is defined %}{{ bairro.fkEstadoId.nome }}{% endif %}</td>
+                <td>{% if bairro.fkCidadeId is defined %}{{ bairro.fkCidadeId.nome }}{% endif %}</td>
                 <td>{{ bairro.nome }}</td>
                 <td>
-                    <a href="{{ path('bairro_show', {'id': bairro.id}) }}">Visualizar</a>
                     <a href="{{ path('bairro_edit', {'id': bairro.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Nenhum registro encontrado</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('bairro_new') }}">Create new</a>
+    <div class="navigation">
+        {{ knp_pagination_render(bairros) }}
+    </div>
+    <div>
+        <a class="btn btn-dark btn-rounded" href="{{ path('bairro_new') }}">Cadastrar</a>
+    </div>
 {% endblock %}

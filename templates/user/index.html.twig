@@ -3,7 +3,7 @@
 {% block breadcrumb %}Gerenciar Usuários{% endblock %}
 
 {% block body %}
-    <h1>Usuários administradores</h1>
+    <h3>Gerenciar Usuários</h3>
 
     <table class="table table-striped">
         <thead>
@@ -12,7 +12,7 @@
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Cpf</th>
-                <th>TelefonePrincipal</th>
+                <th>Telefone Principal</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -31,11 +31,13 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="17">no records found</td>
+                <td colspan="17">Nenhum registro encontrado</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('user_new') }}">Criar novo usuário</a>
+    <div class="navigation">
+        {{ knp_pagination_render(pessoas) }}
+    </div>
+    <a class="btn btn-dark btn-rounded" href="{{ path('user_new') }}">Cadastrar</a>
 {% endblock %}

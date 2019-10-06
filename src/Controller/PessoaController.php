@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/admin/pessoa")
@@ -22,10 +23,16 @@ class PessoaController extends AbstractController
     /**
      * @Route("/", name="pessoa_index", methods={"GET"})
      */
-    public function index(PessoaRepository $pessoaRepository): Response
+    public function index(PessoaRepository $pessoaRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $page = $request->query->getInt('page',1);
+
+        $pessoas = $pessoaRepository->findAll();
+
+        $pessoas = $paginator->paginate($pessoas, $page, 15);
+
         return $this->render('pessoa/index.html.twig', [
-            'pessoas' => $pessoaRepository->findAll(),
+            'pessoas' => $pessoas,
         ]);
     }
 

@@ -8,13 +8,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Knp\Component\Pager\PaginatorInterface;
 
 class AtualizarVendaController extends AbstractController
 {
     /**
      * @Route("/admin/atualizar-venda", name="atualizar_venda")
      */
-    public function index(ImovelRepository $imovelRepository, Request $request)
+    public function index(ImovelRepository $imovelRepository, PaginatorInterface $paginator, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -48,8 +49,14 @@ class AtualizarVendaController extends AbstractController
 
         }
 
+        $page = $request->query->getInt('page',1);
+
+        $imoveis = $imovelRepository->findBy(['status' => 'disponivel', 'tipoAnuncio' => 'vender']);
+
+        $imoveis = $paginator->paginate($imoveis, $page, 15);
+
         return $this->render('atualizar_venda/index.html.twig', [
-            'imovels' => $imovelRepository->findBy(['status' => 'disponivel', 'tipoAnuncio' => 'vender']),
+            'imovels' => $imoveis,
         ]);
     }
 

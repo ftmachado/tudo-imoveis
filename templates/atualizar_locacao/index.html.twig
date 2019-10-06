@@ -39,7 +39,9 @@
                 {% endfor %}
             </tbody>
         </table>
-
+        <div class="navigation">
+            {{ knp_pagination_render(imovels) }}
+        </div>
         <br>
         <div class="form-group form-message-light">
             <label class="col-md-1 control-label" for="atualizar_locacao_status">Status</label>
