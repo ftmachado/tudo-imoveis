@@ -1,5 +1,5 @@
-<form method="post" action="{{ path('imobiliaria_atuacao_delete', {'id': imobiliaria_atuacao.id}) }}" onsubmit="return confirm('Tem certeza que quer deletar??');">
+<form method="post" class="pull-right" action="{{ path('imobiliaria_atuacao_delete', {'id': imobiliaria_atuacao.id}) }}" onsubmit="return confirm('Tem certeza que quer deletar??');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ imobiliaria_atuacao.id) }}">
-    <button class="btn">Deletar</button>
+    <button class="btn btn-danger btn-rounded">Deletar</button>
 </form>

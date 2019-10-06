@@ -1,13 +1,13 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block breadcrumb %}New ImobiliariaAtuacao{% endblock %}
+{% block breadcrumb %}Cadastrar Local de Atuação{% endblock %}
 
 {% block body %}
-    <h1>Create new ImobiliariaAtuacao</h1>
+    <h3>Novo local de atuação</h3>
 
     {{ include('imobiliaria_atuacao/_form.html.twig') }}
 
-    <a href="{{ path('imobiliaria_atuacao_index') }}">Voltar</a>
+    <a class="btn btn-default btn-rounded" href="{{ path('imobiliaria_atuacao_index') }}">Voltar</a>
 {% endblock %}
 
 {% block extrajavascript %}

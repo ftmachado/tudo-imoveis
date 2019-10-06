@@ -3,7 +3,8 @@
 {% block breadcrumb %}Locais de Atuação{% endblock %}
 
 {% block body %}
-    <h1>Locais de Atuação</h1>
+    <h3>Locais de Atuação</h3>
+    <h4>Imobiliária Tudo Imóveis</h4>
 
     <table class="table table-striped">
         <thead>
@@ -27,11 +28,13 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="2">no records found</td>
+                <td colspan="2">Nenhum registro encontrado</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('imobiliaria_atuacao_new') }}">Create new</a>
+    <div>
+        <a class="btn btn-dark btn-rounded" href="{{ path('imobiliaria_atuacao_new') }}">Cadastrar</a>
+    </div>
 {% endblock %}

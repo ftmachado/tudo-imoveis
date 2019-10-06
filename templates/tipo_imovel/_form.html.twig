@@ -1,4 +1,15 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<form class="form-horizontal form-padding" method="post">
+
+    <fieldset>
+        <legend>Tipo</legend>
+        <div class="form-group form-message-light">
+            <label class="col-md-3 control-label" for="{{ form.nome.vars['id'] }}">Nome</label>
+            <div class="col-md-4">
+                {{ form_widget(form.nome) }}
+            </div>
+        </div>
+    </fieldset>
+
+    <button class="btn btn-primary btn-rounded pull-right" type="submit">{{ button_label|default('Salvar') }}</button>
+
+</form>

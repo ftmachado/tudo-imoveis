@@ -1,56 +1,57 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block breadcrumb %}Atualizar Locação{% endblock %}
+{% block breadcrumb %}Atualizar Locação
+{% endblock %}
 
 {% block body %}
-    <h1>Atualizar Locação</h1>
+    <h3>Atualizar Locação</h3>
 
-<form class="form-horizontal form-padding" method="post">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Id</th>
-                <th>Titulo</th>
-                <th>TipoAnuncio</th>
-                <th>Endereco</th>
-                <th>Numero</th>
-                <th>Status</th>
-                <th>ValorProprietario</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for imovel in imovels %}
-            <tr>
-                <td><input type="checkbox" name="atualizar_locacao[checkLocacao][]" value="{{ imovel.id }}"></td>
-                <td>{{ imovel.id }}</td>
-                <td>{{ imovel.titulo }}</td>
-                <td>{{ imovel.tipoAnuncio }}</td>
-                <td>{{ imovel.endereco }}</td>
-                <td>{{ imovel.numero }}</td>
-                <td>{{ imovel.status }}</td>
-                <td>{{ imovel.valorProprietario }}</td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="22">Nenhum registro encontrado</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <form class="form-horizontal form-padding" method="post">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Código</th>
+                    <th>Tpitulo</th>
+                    <th>Tipo de Anúncio</th>
+                    <th>Endereço</th>
+                    <th>Número</th>
+                    <th>Status</th>
+                    <th>Valor do Proprietário</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for imovel in imovels %}
+                    <tr>
+                        <td><input type="checkbox" name="atualizar_locacao[checkLocacao][]" value="{{ imovel.id }}"></td>
+                        <td>{{ imovel.id }}</td>
+                        <td>{{ imovel.titulo }}</td>
+                        <td>{{ imovel.tipoAnuncio }}</td>
+                        <td>{{ imovel.endereco }}</td>
+                        <td>{{ imovel.numero }}</td>
+                        <td>{{ imovel.status }}</td>
+                        <td>{{ imovel.valorProprietario }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="22">Nenhum registro encontrado</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    <br>
-    <div class="form-group form-message-light">
-        <label class="col-md-1 control-label" for="atualizar_locacao_status">Status</label>
-        <div class="col-md-4">
-            <select id="atualizar_locacao_status" name="atualizar_locacao[status]" class="form-control">
-                <option value="alugado">Alugado</option>
-                <option value="cancelado">Cancelado</option>
-            </select>
+        <br>
+        <div class="form-group form-message-light">
+            <label class="col-md-1 control-label" for="atualizar_locacao_status">Status</label>
+            <div class="col-md-4">
+                <select id="atualizar_locacao_status" name="atualizar_locacao[status]" class="form-control">
+                    <option value="alugado">Alugado</option>
+                    <option value="cancelado">Cancelado</option>
+                </select>
+            </div>
         </div>
-    </div>
-    <br>
-    <button class="btn btn-primary" type="submit">Atualizar</button>
+        <br>
+        <button class="btn btn-primary btn-rounded" type="submit">Atualizar</button>
 
-</form>
+    </form>
 {% endblock %}

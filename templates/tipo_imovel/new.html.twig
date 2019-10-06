@@ -3,9 +3,9 @@
 {% block breadcrumb %}Cadastrar Tipo de Imóvel{% endblock %}
 
 {% block body %}
-    <h1>Create new TipoImovel</h1>
+    <h3>Novo tipo de imóvel</h3>
 
     {{ include('tipo_imovel/_form.html.twig') }}
 
-    <a href="{{ path('tipo_imovel_index') }}">Voltar</a>
+    <a class="btn btn-default btn-rounded" href="{{ path('tipo_imovel_index') }}">Voltar</a>
 {% endblock %}

@@ -1,9 +1,9 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block breadcrumb %}Tipo de Imóvel{% endblock %}
+{% block breadcrumb %}Tipos de Imóveis{% endblock %}
 
 {% block body %}
-    <h1>Tipo de Imóvel</h1>
+    <h3>Tipos de Imóveis</h3>
 
     <table class="table table-striped">
         <thead>
@@ -17,17 +17,18 @@
             <tr>
                 <td>{{ tipo_imovel.nome }}</td>
                 <td>
-                    <a href="{{ path('tipo_imovel_show', {'id': tipo_imovel.id}) }}">Visualizar</a>
                     <a href="{{ path('tipo_imovel_edit', {'id': tipo_imovel.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Nenhum registro encontrado</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('tipo_imovel_new') }}">Create new</a>
+    <div>
+        <a class="btn btn-dark btn-rounded" href="{{ path('tipo_imovel_new') }}">Cadastrar</a>
+    </div>
 {% endblock %}

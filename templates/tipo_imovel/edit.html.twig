@@ -1,13 +1,14 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block breadcrumb %}Edit TipoImovel{% endblock %}
+{% block breadcrumb %}Atualizar tipo de imóvel{% endblock %}
 
 {% block body %}
-    <h1>Edit TipoImovel</h1>
-
-    {{ include('tipo_imovel/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('tipo_imovel_index') }}">Voltar</a>
-
+    <h3>Atualizar tipo de imóvel</h3>
     {{ include('tipo_imovel/_delete_form.html.twig') }}
+    <br>
+
+    {{ include('tipo_imovel/_form.html.twig', {'button_label': 'Atualizar'}) }}
+
+    <a class="btn btn-default btn-rounded" href="{{ path('tipo_imovel_index') }}">Voltar</a>
+
 {% endblock %}

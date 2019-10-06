@@ -1,15 +1,16 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block breadcrumb %}Edit ImobiliariaAtuacao{% endblock %}
+{% block breadcrumb %}Atualizar local de atuação{% endblock %}
 
 {% block body %}
-    <h1>Edit ImobiliariaAtuacao</h1>
-
-    {{ include('imobiliaria_atuacao/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('imobiliaria_atuacao_index') }}">Voltar</a>
-
+    <h3>Atualizar local de atuação</h3>
     {{ include('imobiliaria_atuacao/_delete_form.html.twig') }}
+    <br>
+
+    {{ include('imobiliaria_atuacao/_form.html.twig', {'button_label': 'Atualizar'}) }}
+
+    <a class="btn btn-default btn-rounded" href="{{ path('imobiliaria_atuacao_index') }}">Voltar</a>
+
 {% endblock %}
 
 {% block extrajavascript %}

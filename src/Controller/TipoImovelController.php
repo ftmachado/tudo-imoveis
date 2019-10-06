@@ -48,15 +48,15 @@ class TipoImovelController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="tipo_imovel_show", methods={"GET"})
-     */
-    public function show(TipoImovel $tipoImovel): Response
-    {
-        return $this->render('tipo_imovel/show.html.twig', [
-            'tipo_imovel' => $tipoImovel,
-        ]);
-    }
+    // /**
+    //  * @Route("/{id}", name="tipo_imovel_show", methods={"GET"})
+    //  */
+    // public function show(TipoImovel $tipoImovel): Response
+    // {
+    //     return $this->render('tipo_imovel/show.html.twig', [
+    //         'tipo_imovel' => $tipoImovel,
+    //     ]);
+    // }
 
     /**
      * @Route("/{id}/edit", name="tipo_imovel_edit", methods={"GET","POST"})
