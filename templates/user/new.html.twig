@@ -1,6 +1,6 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block title %}Novo Usuario{% endblock %}
+{% block breadcrumb %}Novo Usuario{% endblock %}
 
 {% block body %}
     <h1>Novo cadastro de usuários</h1>
@@ -8,7 +8,7 @@
 
     {{ include('user/_form.html.twig') }}
 
-    <a href="{{ path('user_index') }}">back to list</a>
+    <a href="{{ path('user_index') }}">Voltar</a>
 {% endblock %}
 
 {% block extrajavascript %}

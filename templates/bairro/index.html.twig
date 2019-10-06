@@ -1,6 +1,6 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block title %}Bairro index{% endblock %}
+{% block breadcrumb %}Bairro index{% endblock %}
 
 {% block body %}
     <h1>Bairro index</h1>
@@ -12,7 +12,7 @@
                 <th>Estado</th>
                 <th>Cidade</th>
                 <th>Nome</th>
-                <th>actions</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -23,8 +23,8 @@
                 <td>{{ bairro.fkCidadeId.nome }}</td>
                 <td>{{ bairro.nome }}</td>
                 <td>
-                    <a href="{{ path('bairro_show', {'id': bairro.id}) }}">show</a>
-                    <a href="{{ path('bairro_edit', {'id': bairro.id}) }}">edit</a>
+                    <a href="{{ path('bairro_show', {'id': bairro.id}) }}">Visualizar</a>
+                    <a href="{{ path('bairro_edit', {'id': bairro.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}

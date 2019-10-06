@@ -1,17 +1,16 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block title %}Edit Pessoa{% endblock %}
+{% block breadcrumb %}Atualizar cliente{% endblock %}
 
 {% block body %}
-    <h1>Edit Pessoa</h1>
-
-    {# <form class="form-horizontal form-padding" action="{{ path('pessoa_edit', { 'id': entity.id }) }}" method="post"> #}
-
-    {{ include('pessoa/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('pessoa_index') }}">back to list</a>
+    <h3>Atualizar cliente</h3>
 
     {{ include('pessoa/_delete_form.html.twig') }}
+    <br>
+    {{ include('pessoa/_form.html.twig', {'button_label': 'Atualizar'}) }}
+
+    <a class="btn btn-default btn-rounded" href="{{ path('pessoa_index') }}">Voltar</a>
+
 {% endblock %}
 
 {% block extrajavascript %}

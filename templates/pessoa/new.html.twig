@@ -1,13 +1,13 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block title %}New Pessoa{% endblock %}
+{% block breadcrumb %}Cadastro de Clientes{% endblock %}
 
 {% block body %}
-    <h1>Create new Pessoa</h1>
+    <h3>Novo Cliente</h3>
 
     {{ include('pessoa/_form.html.twig') }}
 
-    <a href="{{ path('pessoa_index') }}">back to list</a>
+    <a class="btn btn-default btn-rounded" href="{{ path('pessoa_index') }}">Voltar</a>
 {% endblock %}
 
 {% block extrajavascript %}

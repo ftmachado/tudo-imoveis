@@ -1,13 +1,13 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block title %}Edit TipoImovel{% endblock %}
+{% block breadcrumb %}Edit TipoImovel{% endblock %}
 
 {% block body %}
     <h1>Edit TipoImovel</h1>
 
     {{ include('tipo_imovel/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('tipo_imovel_index') }}">back to list</a>
+    <a href="{{ path('tipo_imovel_index') }}">Voltar</a>
 
     {{ include('tipo_imovel/_delete_form.html.twig') }}
 {% endblock %}

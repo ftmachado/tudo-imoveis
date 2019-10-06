@@ -89,9 +89,10 @@
 
                     <div id="page-head">
                     {% block pagehead %}
-                        <div id="page-title">
-                            <h1 class="page-header text-overflow">{% block title %}{% endblock %}</h1>
-                        </div>
+                        <ol class="breadcrumb">
+                            <li><a href="{{ path('dashboard') }}"><i class="ti-home"></i></a></li>
+                            <li class="active">{% block breadcrumb %}{% endblock %}</li>
+                        </ol>
                     {% endblock %}
                     </div>
 

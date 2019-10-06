@@ -1,21 +1,21 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block title %}Imovel index{% endblock %}
+{% block breadcrumb %}Imóveis{% endblock %}
 
 {% block body %}
-    <h1>Imovel index</h1>
+    <h3>Listagem de Imóveis</h3>
 
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Titulo</th>
-                <th>TipoAnuncio</th>
-                <th>Endereco</th>
-                <th>Numero</th>
+                <th>Tipo Anúncio</th>
+                <th>Endereço</th>
+                <th>Número</th>
                 <th>Status</th>
-                <th>ValorProprietario</th>
-                <th>actions</th>
+                <th>Valor do Proprietário</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -29,17 +29,19 @@
                 <td>{{ imovel.status }}</td>
                 <td>{{ imovel.valorProprietario }}</td>
                 <td>
-                    <a href="{{ path('imovel_show', {'id': imovel.id}) }}">show</a>
-                    <a href="{{ path('imovel_edit', {'id': imovel.id}) }}">edit</a>
+                    <a href="{{ path('imovel_show', {'id': imovel.id}) }}">Visualizar</a>
+                    <a href="{{ path('imovel_edit', {'id': imovel.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="22">no records found</td>
+                <td colspan="22">Nenhum registro encontrado</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('imovel_new') }}">Create new</a>
+    
+    <div>
+        <a class="btn btn-dark btn-rounded" href="{{ path('imovel_new') }}">Cadastrar</a>
+    </div>
 {% endblock %}

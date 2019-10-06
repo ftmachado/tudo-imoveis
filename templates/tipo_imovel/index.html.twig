@@ -1,6 +1,6 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block title %}Tipo de Imóvel{% endblock %}
+{% block breadcrumb %}Tipo de Imóvel{% endblock %}
 
 {% block body %}
     <h1>Tipo de Imóvel</h1>
@@ -9,7 +9,7 @@
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>actions</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -17,8 +17,8 @@
             <tr>
                 <td>{{ tipo_imovel.nome }}</td>
                 <td>
-                    <a href="{{ path('tipo_imovel_show', {'id': tipo_imovel.id}) }}">show</a>
-                    <a href="{{ path('tipo_imovel_edit', {'id': tipo_imovel.id}) }}">edit</a>
+                    <a href="{{ path('tipo_imovel_show', {'id': tipo_imovel.id}) }}">Visualizar</a>
+                    <a href="{{ path('tipo_imovel_edit', {'id': tipo_imovel.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}

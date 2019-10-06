@@ -1,58 +1,66 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block title %}Pessoa{% endblock %}
+{% block breadcrumb %}Cliente{% endblock %}
 
 {% block body %}
-    <h1>Pessoa</h1>
-
-    <table class="table">
+    <h3>{{ pessoa.nome }}</h3>
+    {{ include('pessoa/_delete_form.html.twig') }}
+    <br>
+    <br>
+    <table class="table table-striped">
         <tbody>
             <tr>
-                <th>Id</th>
+                <td colspan="2">Informações Pessoais</td>
+            </tr>
+            <tr>
+                <th>Código</th>
                 <td>{{ pessoa.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ pessoa.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ pessoa.roles ? pessoa.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ pessoa.password }}</td>
-            </tr>
-            <tr>
-                <th>Cpf</th>
-                <td>{{ pessoa.cpf }}</td>
-            </tr>
-            <tr>
-                <th>Rg</th>
-                <td>{{ pessoa.rg }}</td>
             </tr>
             <tr>
                 <th>Nome</th>
                 <td>{{ pessoa.nome }}</td>
             </tr>
             <tr>
-                <th>TelefonePrincipal</th>
+                <th>CPF</th>
+                <td>{{ pessoa.cpf }}</td>
+            </tr>
+            <tr>
+                <th>RG</th>
+                <td>{{ pessoa.rg }}</td>
+            </tr>
+            <tr>
+                <th>Telefone Principal</th>
                 <td>{{ pessoa.telefonePrincipal }}</td>
             </tr>
             <tr>
-                <th>TelefoneSecundario</th>
+                <th>Telefone Secundário</th>
                 <td>{{ pessoa.telefoneSecundario }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ pessoa.email }}</td>
+            </tr>
+            <tr>
+                <th>Acessos</th>
+                <td>{{ pessoa.roles ? pessoa.roles|json_encode : '' }}</td>
             </tr>
             <tr>
                 <th>Usuario</th>
                 <td>{{ pessoa.usuario }}</td>
             </tr>
+            {# <tr>
+                <th>Senha</th>
+                <td>{{ pessoa.password }}</td>
+            </tr> #}
             <tr>
-                <th>Endereco</th>
+                <td colspan="2">Endereço</td>
+            </tr>
+            <tr>
+                <th>Endereço</th>
                 <td>{{ pessoa.endereco }}</td>
             </tr>
             <tr>
-                <th>Numero</th>
+                <th>Número</th>
                 <td>{{ pessoa.numero }}</td>
             </tr>
             <tr>
@@ -64,19 +72,26 @@
                 <td>{{ pessoa.complemento }}</td>
             </tr>
             <tr>
-                <th>Cliente</th>
-                <td>{{ pessoa.cliente ? 'Yes' : 'No' }}</td>
+                <th>Cidade</th>
+                <td>{{ pessoa.fkCidadeId.nome }}</td>
             </tr>
             <tr>
-                <th>Administrador</th>
-                <td>{{ pessoa.administrador ? 'Yes' : 'No' }}</td>
+                <th>Estado</th>
+                <td>{{ pessoa.fkEstadoId.nome }}</td>
+            </tr>
+            <tr>
+                <th>É cliente?</th>
+                <td>{{ pessoa.cliente ? 'Sim' : 'Não' }}</td>
+            </tr>
+            <tr>
+                <th>É administrador?</th>
+                <td>{{ pessoa.administrador ? 'Sim' : 'Não' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('pessoa_index') }}">back to list</a>
+    <a class="btn btn-default btn-rounded" href="{{ path('pessoa_index') }}">Voltar</a>
 
-    <a href="{{ path('pessoa_edit', {'id': pessoa.id}) }}">edit</a>
+    <a class="pull-right btn btn-primary btn-rounded" href="{{ path('pessoa_edit', {'id': pessoa.id}) }}">Editar</a>
 
-    {{ include('pessoa/_delete_form.html.twig') }}
 {% endblock %}

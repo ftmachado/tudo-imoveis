@@ -1,121 +1,129 @@
 {% extends 'layout-admin.html.twig' %}
 
 {% block extracss %}
-<style>
-    .dz-image img{
-        height: 120px;
-    }
-</style>
+    <style>
+        .dz-image img {
+            height: 120px;
+        }
+    </style>
 {% endblock %}
 
-{% block title %}Edit Imovel{% endblock %}
+{% block breadcrumb %}Atualizar Imóvel
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Imovel</h1>
-
-    {{ include('imovel/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <form id="form-dropzone" action="{{ path('file_edit', {'id': app.request.get('id')} ) }}" class="dropzone">
-        <div class="dz-default dz-message">
-            <div class="dz-icon">
-                <i class="ti-cloud-up icon-5x"></i>
-            </div>
-            <div>
-                <span class="dz-text">Drop files to upload</span>
-                <p class="text-sm text-muted">or click to pick manually</p>
-            </div>
-        </div>
-        <div class="fallback">
-            <input name="file" type="file" multiple>
-        </div>
-    </form>
-
-    <button id="save" class="btn btn-primary" type="submit">{{ button_label|default('Update') }}</button>
-
-    <a href="{{ path('imovel_index') }}">back to list</a>
-
+    <h3>Atualizar Imóvel</h3>
     {{ include('imovel/_delete_form.html.twig') }}
+    <br>
+
+    {{ include('imovel/_form.html.twig') }}
+
+    <fieldset>
+        <legend>Fotos</legend>
+        <form id="form-dropzone" action="{{ path('file_edit', {'id': app.request.get('id')} ) }}" class="dropzone">
+            <div class="dz-default dz-message">
+                <div class="dz-icon">
+                    <i class="ti-cloud-up icon-5x"></i>
+                </div>
+                <div>
+                    <span class="dz-text">Drop files to upload</span>
+                    <p class="text-sm text-muted">or click to pick manually</p>
+                </div>
+            </div>
+            <div class="fallback">
+                <input name="file" type="file" multiple>
+            </div>
+        </form>
+    </fieldset>
+    <br>
+
+    <button id="save" class="btn btn-primary btn-rounded pull-right" type="submit">{{ button_label|default('Atualizar') }}</button>
+
+    <a class="btn btn-default btn-rounded" href="{{ path('imovel_index') }}">Voltar</a>
+
 {% endblock %}
 
 {% block extrajavascript %}
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    /*
+        /*
     * Fonte: https://github.com/enyo/dropzone/wiki/FAQ#how-to-show-files-already-stored-on-server
     */
 
-    Dropzone.options.formDropzone = {
-        maxFileSize : 4, //MB
-        maxFiles: 10,
-        uploadMultiple: false,
-        addRemoveLinks : true,
-        acceptedFiles: ".jpg, .jpeg, .png, .gif",
-        init: function() {
+        Dropzone.options.formDropzone = {
+            maxFileSize: 4, // MB
+            maxFiles: 10,
+            uploadMultiple: false,
+            addRemoveLinks: true,
+            acceptedFiles: ".jpg, .jpeg, .png, .gif",
+            init: function () {
 
-            var thisDropzone = this;
+                var thisDropzone = this;
 
-            $.getJSON("{{ path('file_edit', {'id': app.request.get('id')} )}}", function(data) {
+                $.getJSON("{{ path('file_edit', {'id': app.request.get('id')} ) }}", function (data) {
 
-                $.each(data, function(key,value){
+                    $.each(data, function (key, value) { // here we get the file name and size as response
+                        var mockFile = {
+                            name: value.name,
+                            size: value.size
+                        };
 
-                    // here we get the file name and size as response 
-                    var mockFile = { name: value.name, size: value.size };
+                        thisDropzone.emit("addedfile", mockFile);
+                        thisDropzone.emit("thumbnail", mockFile, value.file);
+                        thisDropzone.emit("complete", mockFile);
+                        thisDropzone.options.maxFiles = thisDropzone.options.maxFiles - data.length;
 
-                    thisDropzone.emit("addedfile", mockFile);
-                    thisDropzone.emit("thumbnail", mockFile, value.file);
-                    thisDropzone.emit("complete", mockFile);
-                    thisDropzone.options.maxFiles = thisDropzone.options.maxFiles - data.length;
+                    });
 
                 });
 
-            });
+                this.on("removedfile", function (file) {
 
-            this.on("removedfile", function(file) {
+                    $.ajax({
+                        url: "{{ path('file_delete') }}",
+                        type: "POST",
+                        data: {
+                            'id': "{{ app.request.get('id') }}",
+                            'fileName': file.name
+                        }
+                    });
+
+                });
+            }
+
+        };
+
+        $(document).ready(function () {
+
+            $("#imovel_fkEstadoId").on('change', function () {
 
                 $.ajax({
-                    url: "{{ path('file_delete') }}",
                     type: "POST",
+                    url: "{{ path('imovel_lista_cidades_atuacao') }}",
+                    cache: false,
                     data: {
-                        'id': "{{app.request.get('id')}}",
-                        'fileName': file.name
+                        'estadoId': this.value
                     }
+                }).done(function (cities) {
+
+                    let options = '';
+                    $.each(cities, function (i, item) {
+                        options += '<option value="' + item['id'] + '">' + item['nome'] + '</option>';
+                    });
+
+                    $("#imovel_fkCidadeId").empty().append(options);
+
+                }).fail(function () {
+                    console.log('Falha ao buscar as cidades.');
                 });
 
             });
-        }
 
-    };
-
-    $(document).ready( function() {
-
-        $("#imovel_fkEstadoId").on('change', function(){
-
-            $.ajax({
-                type: "POST",
-                url: "{{ path('imovel_lista_cidades_atuacao') }}",
-                cache: false,
-                data: {
-                    'estadoId': this.value
-                }
-            }).done(function(cities) {
-
-                let options = '';
-                $.each(cities, function(i, item){
-                    options += '<option value="'+item['id']+'">'+item['nome']+'</option>';
-                });
-                
-                $("#imovel_fkCidadeId").empty().append(options);
-
-            }).fail(function(){
-                console.log( 'Falha ao buscar as cidades.' );
+            $('#save').on('click', function () {
+                $('#form-imovel').submit();
             });
 
         });
 
-        $('#save').on('click', function(){
-            $('#form-imovel').submit();
-        });
-        
-    });
-</script>
+    </script>
 {% endblock %}

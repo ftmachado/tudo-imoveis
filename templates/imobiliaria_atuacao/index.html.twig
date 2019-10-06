@@ -1,6 +1,6 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block title %}Locais de Atuação{% endblock %}
+{% block breadcrumb %}Locais de Atuação{% endblock %}
 
 {% block body %}
     <h1>Locais de Atuação</h1>
@@ -11,7 +11,7 @@
                 <th>Id</th>
                 <th>Estado</th>
                 <th>Cidade</th>
-                <th>actions</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -21,8 +21,8 @@
                 <td>{{ imobiliaria_atuacao.fkEstadoId.nome }}</td>
                 <td>{% if imobiliaria_atuacao.fkCidadeId %}{{ imobiliaria_atuacao.fkCidadeId.nome }}{% endif %}</td>
                 <td>
-                    <a href="{{ path('imobiliaria_atuacao_show', {'id': imobiliaria_atuacao.id}) }}">show</a>
-                    <a href="{{ path('imobiliaria_atuacao_edit', {'id': imobiliaria_atuacao.id}) }}">edit</a>
+                    <a href="{{ path('imobiliaria_atuacao_show', {'id': imobiliaria_atuacao.id}) }}">Visualizar</a>
+                    <a href="{{ path('imobiliaria_atuacao_edit', {'id': imobiliaria_atuacao.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}

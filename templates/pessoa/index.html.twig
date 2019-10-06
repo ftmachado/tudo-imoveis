@@ -1,41 +1,42 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block title %}Pessoa index{% endblock %}
+{% block breadcrumb %}Clientes{% endblock %}
 
 {% block body %}
-    <h1>Pessoa index</h1>
-
+    <h3>Clientes</h3>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Email</th>
-                <th>Cpf</th>
                 <th>Nome</th>
-                <th>TelefonePrincipal</th>
-                <th>actions</th>
+                <th>CPF</th>
+                <th>Email</th>
+                <th>Telefone Principal</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
         {% for pessoa in pessoas %}
             <tr>
                 <td>{{ pessoa.id }}</td>
-                <td>{{ pessoa.email }}</td>
-                <td>{{ pessoa.cpf }}</td>
                 <td>{{ pessoa.nome }}</td>
+                <td>{{ pessoa.cpf }}</td>
+                <td>{{ pessoa.email }}</td>
                 <td>{{ pessoa.telefonePrincipal }}</td>
                 <td>
-                    <a href="{{ path('pessoa_show', {'id': pessoa.id}) }}">show</a>
-                    <a href="{{ path('pessoa_edit', {'id': pessoa.id}) }}">edit</a>
+                    <a href="{{ path('pessoa_show', {'id': pessoa.id}) }}">Visualizar</a>
+                    <a href="{{ path('pessoa_edit', {'id': pessoa.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="17">no records found</td>
+                <td colspan="17">Nenhum registro encontrado</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    <div class="">
+        <a class="btn btn-dark btn-rounded" href="{{ path('pessoa_new') }}">Cadastrar</a>
+    </div>
 
-    <a href="{{ path('pessoa_new') }}">Create new</a>
 {% endblock %}

@@ -1,46 +1,43 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block title %}Imovel{% endblock %}
+{% block breadcrumb %}Imovel{% endblock %}
 
 {% block body %}
-    <h1>Imovel</h1>
+    <h3>{{ imovel.titulo }}</h3>
+    {{ include('imovel/_delete_form.html.twig') }}
+    <br><br>
 
-    <table class="table">
+    <table class="table table-striped">
         <tbody>
             <tr>
-                <th>Id</th>
+                <td colspan="2">Informações Gerais</td>
+            </tr>
+            <tr>
+                <th>Código</th>
                 <td>{{ imovel.id }}</td>
+            </tr>
+            <tr>
+                <th>Proprietário</th>
+                <td>{{ imovel.fkProprietarioId.nome }}</td>
+            </tr>
+            <tr>
+                <th>Tipo de imóvel</th>
+                <td>{{ imovel.fkTipoImovelId.nome }}</td>
+            </tr>
+            <tr>
+                <th>Tipo de Anúncio</th>
+                <td>{{ imovel.tipoAnuncio }}</td>
             </tr>
             <tr>
                 <th>Titulo</th>
                 <td>{{ imovel.titulo }}</td>
             </tr>
             <tr>
-                <th>TipoAnuncio</th>
-                <td>{{ imovel.tipoAnuncio }}</td>
-            </tr>
-            <tr>
-                <th>Endereco</th>
-                <td>{{ imovel.endereco }}</td>
-            </tr>
-            <tr>
-                <th>Numero</th>
-                <td>{{ imovel.numero }}</td>
-            </tr>
-            <tr>
-                <th>Cep</th>
-                <td>{{ imovel.cep }}</td>
-            </tr>
-            <tr>
-                <th>Complemento</th>
-                <td>{{ imovel.complemento }}</td>
-            </tr>
-            <tr>
-                <th>AreaTotal</th>
+                <th>Área Total</th>
                 <td>{{ imovel.areaTotal }}</td>
             </tr>
             <tr>
-                <th>AreaUtil</th>
+                <th>Área Util</th>
                 <td>{{ imovel.areaUtil }}</td>
             </tr>
             <tr>
@@ -56,14 +53,6 @@
                 <td>{{ imovel.banheiro }}</td>
             </tr>
             <tr>
-                <th>ExposicaoSolar</th>
-                <td>{{ imovel.exposicaoSolar }}</td>
-            </tr>
-            <tr>
-                <th>PosicaoPredio</th>
-                <td>{{ imovel.posicaoPredio }}</td>
-            </tr>
-            <tr>
                 <th>Status</th>
                 <td>{{ imovel.status }}</td>
             </tr>
@@ -76,27 +65,68 @@
                 <td>{{ imovel.descricao }}</td>
             </tr>
             <tr>
-                <th>ValorProprietario</th>
+                <td colspan="2">Valores</td>
+            </tr>
+            <tr>
+                <th>Valor do Proprietário</th>
                 <td>{{ imovel.valorProprietario }}</td>
             </tr>
             <tr>
-                <th>ValorCondominio</th>
+                <th>Valor do Condomínio</th>
                 <td>{{ imovel.valorCondominio }}</td>
             </tr>
             <tr>
-                <th>ValorIptu</th>
+                <th>Valor do Iptu</th>
                 <td>{{ imovel.valorIptu }}</td>
             </tr>
             <tr>
-                <th>ValorImobiliaria</th>
+                <th>Valor da Imobiliária</th>
                 <td>{{ imovel.valorImobiliaria }}</td>
+            </tr>
+            <tr>
+                <td colspan="2">Localização</td>
+            </tr>
+            <tr>
+                <th>ExposicaoSolar</th>
+                <td>{{ imovel.exposicaoSolar }}</td>
+            </tr>
+            <tr>
+                <th>PosicaoPredio</th>
+                <td>{{ imovel.posicaoPredio }}</td>
+            </tr>
+            <tr>
+                <th>Endereço</th>
+                <td>{{ imovel.endereco }}</td>
+            </tr>
+            <tr>
+                <th>Número</th>
+                <td>{{ imovel.numero }}</td>
+            </tr>
+            <tr>
+                <th>Cep</th>
+                <td>{{ imovel.cep }}</td>
+            </tr>
+            <tr>
+                <th>Complemento</th>
+                <td>{{ imovel.complemento }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{% if imove.fkEstadoId is defined %} {{ imovel.fkEstadoId.nome }} {% endif %}</td>
+            </tr>
+            <tr>
+                <th>Cidade</th>
+                <td>{% if imove.fkCidadeId is defined %} {{ imovel.fkCidadeId.nome }} {% endif %}</td>
+            </tr>
+            <tr>
+                <th>Bairro</th>
+                <td>{% if imove.fkBairroId is defined %} {{ imovel.fkBairroId.nome }} {% endif %}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('imovel_index') }}">back to list</a>
+    <a class="btn btn-default btn-rounded" href="{{ path('imovel_index') }}">Voltar</a>
 
-    <a href="{{ path('imovel_edit', {'id': imovel.id}) }}">edit</a>
+    <a class="pull-right btn btn-primary btn-rounded" href="{{ path('imovel_edit', {'id': imovel.id}) }}">Editar</a>
 
-    {{ include('imovel/_delete_form.html.twig') }}
 {% endblock %}

@@ -1,30 +1,36 @@
 {% extends 'layout-admin.html.twig' %}
 
-{% block title %}New Imovel{% endblock %}
+{% block breadcrumb %}Cadastrar Imóvel{% endblock %}
 
 {% block body %}
-    <h1>Create new Imovel</h1>
+    <h3>Novo imóvel</h3>
 
     {{ include('imovel/_form.html.twig') }}
 
-    <form id="form-dropzone" action="{{ path('file_input') }}" class="dropzone">
-        <div class="dz-default dz-message">
-            <div class="dz-icon">
-                <i class="ti-cloud-up icon-5x"></i>
+    <fieldset>
+        <legend>Fotos</legend>
+        
+        <form id="form-dropzone" action="{{ path('file_input') }}" class="dropzone">
+            <div class="dz-default dz-message">
+                <div class="dz-icon">
+                    <i class="ti-cloud-up icon-5x"></i>
+                </div>
+                <div>
+                    <span class="dz-text">Drop files to upload</span>
+                    <p class="text-sm text-muted">or click to pick manually</p>
+                </div>
             </div>
-            <div>
-                <span class="dz-text">Drop files to upload</span>
-                <p class="text-sm text-muted">or click to pick manually</p>
+            <div class="fallback">
+                <input name="file[]" type="file" multiple>
             </div>
-        </div>
-        <div class="fallback">
-            <input name="file[]" type="file" multiple>
-        </div>
-    </form>
+        </form>
+    
+    </fieldset>
+    <br>
 
-    <button id="save" class="btn btn-primary" type="submit">{{ button_label|default('Save') }}</button>
+    <button id="save" class="btn btn-primary btn-rounded pull-right" type="submit">{{ button_label|default('Salvar') }}</button>
 
-    <a href="{{ path('imovel_index') }}">back to list</a>
+    <a class="btn btn-default btn-rounded" href="{{ path('imovel_index') }}">Voltar</a>
 
 {% endblock %}
 
