@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Tudo Imóveis</title>
+
+        <link href="{{ asset('css/css.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/nifty.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/themify-icons.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/busca.css') }}" rel="stylesheet">
+
+    </head>
+
+    <body class="pace-done">
+
+        <div id="container">
+
+            <header id="navbar">
+                <div id="navbar-container" class="boxed" style="height: 59px;"></div>
+            </header>
+
+            <div
+                class="boxed">
+
+                <!--CONTENT CONTAINER-->
+                <div id="content-container">
+
+                    <div id="page-head">
+                        
+                    </div>
+
+                    <div id="page-content">
+                        <div
+                            class="row">
+
+                            <!-- FILTRO -->
+                            <div class="col-lg-3">
+                                <div class="panel">
+
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Filtrar Imóveis</h3>
+                                    </div>
+
+                                    <form class="form-horizontal" method="POST">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label class="control-label" for="{{ form.fkTipoImovelId.vars['id'] }}">Tipo de Imóvel</label>
+                                                <div>
+                                                    {{ form_widget(form.fkTipoImovelId) }}
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="{{ form.fkCidadeId.vars['id'] }}">Cidade</label>
+                                                <div>
+                                                    {{ form_widget(form.fkCidadeId) }}
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="{{ form.fkBairroId.vars['id'] }}">Bairro</label>
+                                                <div>
+                                                    {{ form_widget(form.fkBairroId) }}
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="{{ form.garagem.vars['id'] }}">Garagem</label>
+                                                <div>
+                                                    {{ form_widget(form.garagem) }}
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="{{ form.quarto.vars['id'] }}">Quarto</label>
+                                                <div>
+                                                    {{ form_widget(form.quarto) }}
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="{{ form.banheiro.vars['id'] }}">Banheiro</label>
+                                                <div>
+                                                    {{ form_widget(form.banheiro) }}
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="{{ form.valorImobiliaria.vars['id'] }}">Preço</label>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        {{ form_widget(form.valorImobiliaria.first) }}
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        {{ form_widget(form.valorImobiliaria.second) }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-footer">
+                                            <button class="btn btn-block btn-primary" type="submit">Pesquisar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- END FILTRO  -->
+
+                            <div class="col-md-9">
+                                <div class="panel">
+                                    <div class="panel-body">
+
+                                        <div class="list-group">
+
+                                            {% for imovel in imoveis %}
+                                                <a href="#" class="list-group-item">
+                                                <div class="media">
+                                                    <div class="media-left">
+                                                        <img src="{{ asset( imovel.path ) }}" alt="" class="media-object">
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading">{{ imovel.titulo }} {% if imovel.fkBairroId is not null %}- {{ imovel.fkBairroId.nome }}{% endif %}</h4>
+					                                    <p>{{ imovel.descricao }}</p>
+                                                        <ul class="item-icones">
+                                                            <li>
+                                                                {% if imovel.quarto is not null %}{{ imovel.quarto }}{% else %}0{% endif %} <span><i class="fas fa-bed"></i></span>
+                                                            </li>
+                                                            <li>
+                                                                {% if imovel.banheiro is not null %}{{ imovel.banheiro }}{% else %}0{% endif %} <span><i class="fas fa-shower"></i></span>
+                                                            </li>
+                                                            <li>
+                                                                {% if imovel.garagem is not null %}{{ imovel.garagem }}{% else %}0{% endif %} <span><i class="fas fa-car-alt"></i></span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+					                        </a>
+                                            {% endfor %}
+					                    </div>
+                                        <div class="navigation">
+                                            {{ knp_pagination_render(imoveis) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!--END CONTENT CONTAINER-->
+
+
+                </div>
+
+
+                <!-- FOOTER -->
+                <footer id="footer">
+
+                    <p class="pad-lft">©{{ "now" | date("Y") }}
+                        - Fhabiana Machado</p>
+
+                </footer>
+                <!-- END FOOTER -->
+
+
+                <!-- SCROLL PAGE BUTTON -->
+                <button class="scroll-top btn">
+                    <i class="ti-angle-up"></i>
+                </button>
+            </div>
+            <!-- END OF CONTAINER -->
+
+
+            <!--JAVASCRIPT-->
+            <script src="{{ asset('js/jquery_002.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.js') }}"></script>
+            <script src="{{ asset('js/nifty.js') }}"></script>
+            <script src="{{ asset('js/all.js') }}"></script>
+
+            <script type="text/javascript">
+                function carregaBairros(cidadeId) {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('pessoa_lista_bairros') }}",
+                        cache: false,
+                        data: {
+                            'cidadeId': cidadeId
+                        }
+                    }).done(function (bairros) {
+
+                        let options = '';
+                        options += '<option></option>';
+                        $.each(bairros, function (i, item) {
+                            options += '<option value="' + item['id'] + '">' + item['nome'] + '</option>';
+                        });
+
+                        $("#busca_imovel_fkBairroId").empty().append(options);
+
+                    }).fail(function () {
+                        console.log('Falha ao buscar as cidades.');
+                    });
+                }
+
+                $(document).ready(function () {
+
+                    var cidade = $('#busca_imovel_fkCidadeId');
+
+                    if (cidade.val() != '') {
+                        carregaBairros(cidade.val());
+                    }
+
+                    cidade.on('change', function () {
+                        carregaBairros($(this).val());
+                    });
+                });
+            </script>
+        </body>
+    </body>
+</html>
