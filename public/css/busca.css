@@ -32,3 +32,10 @@ ul .item-icones {
     width: 128px;
     height: 128px;
 }
+
+.preco {
+    font-size: 18px;
+    float: right;
+    color: black;
+    font-weight: 600;
+}

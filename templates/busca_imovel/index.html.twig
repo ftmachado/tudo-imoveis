@@ -36,8 +36,14 @@
                     </div>
 
                     <div id="page-content">
-                        <div
-                            class="row">
+
+                        <div class="row">
+                            <div class="panel">
+
+                            </div>
+                        </div>
+
+                        <div class="row">
 
                             <!-- FILTRO -->
                             <div class="col-lg-3">
@@ -49,6 +55,12 @@
 
                                     <form class="form-horizontal" method="POST">
                                         <div class="panel-body">
+                                            <div class="form-group">
+                                                <label class="control-label" for="{{ form.tipoAnuncio.vars['id'] }}">O que você procura?</label>
+                                                <div>
+                                                    {{ form_widget(form.tipoAnuncio) }}
+                                                </div>
+                                            </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="{{ form.fkTipoImovelId.vars['id'] }}">Tipo de Imóvel</label>
                                                 <div>
@@ -109,6 +121,8 @@
                                 <div class="panel">
                                     <div class="panel-body">
 
+                                        <h5 class="text-right"><mark>{{ total }}</mark> imóveis encontrados. </h5>
+
                                         <div class="list-group">
 
                                             {% for imovel in imoveis %}
@@ -118,8 +132,12 @@
                                                         <img src="{{ asset( imovel.path ) }}" alt="" class="media-object">
                                                     </div>
                                                     <div class="media-body">
-                                                        <h4 class="media-heading">{{ imovel.titulo }} {% if imovel.fkBairroId is not null %}- {{ imovel.fkBairroId.nome }}{% endif %}</h4>
-					                                    <p>{{ imovel.descricao }}</p>
+                                                        <p class="preco">{% if imovel.valorImobiliaria %}R$ {{ imovel.valorImobiliaria }}{% endif %}</p>
+                                                        <h4 class="media-heading">
+                                                            {{ imovel.titulo }} {% if imovel.fkBairroId is not null %}- {{ imovel.fkBairroId.nome }}{% endif %}
+                                                        </h4>
+					                                    <p>{{ imovel.endereco }}</p>
+                                                        <p>{{ imovel.descricao }}</p>
                                                         <ul class="item-icones">
                                                             <li>
                                                                 {% if imovel.quarto is not null %}{{ imovel.quarto }}{% else %}0{% endif %} <span><i class="fas fa-bed"></i></span>
@@ -129,6 +147,9 @@
                                                             </li>
                                                             <li>
                                                                 {% if imovel.garagem is not null %}{{ imovel.garagem }}{% else %}0{% endif %} <span><i class="fas fa-car-alt"></i></span>
+                                                            </li>
+                                                            <li>
+                                                                {% if imovel.areaTotal is not null %}{{ imovel.areaTotal }}m²{% else %}-{% endif %}
                                                             </li>
                                                         </ul>
                                                     </div>

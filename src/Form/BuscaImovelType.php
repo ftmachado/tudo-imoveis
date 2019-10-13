@@ -24,6 +24,20 @@ class BuscaImovelType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('tipoAnuncio', ChoiceType::class, [
+                'required' => true,
+                'expanded' => true,
+                'multiple' => false,
+                'choices'  => [
+                    'Aluguéis' => 'alugar',
+                    'Vendas' => 'vender'
+                ],
+                'data' => 'alugar',
+                'attr' => [
+                    'class' => 'magic-radio'
+                ]
+            ])
+
             ->add('fkTipoImovelId', EntityType::class, [
                 'class' => TipoImovel::class,
                 'choice_label' => 'nome',

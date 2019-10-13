@@ -30,19 +30,37 @@ class BuscaImovelController extends AbstractController
                 $data = $request->request->all();
                 
                 $criterios = [];
+                $min = null;
+                $max = null;
                 foreach ($data['busca_imovel'] as $chave => $item) {
+                    
                     if ($item != "" && !is_array($item)) {
                         $criterios[$chave] = $item;
                     }
+                    
+                    if (isset($item['first']) && $item['first'] != "") {
+                        $min = $item['first'];
+                    }
+                    if (isset($item['second']) && $item['second'] != "") {
+                        $max = $item['second'];
+                    }
+                    
+                }
+                
+                if (!isset($min) && !isset($max)) {
+                    $imoveisFiltrados = $em->getRepository(Imovel::class)->findBy($criterios);
+                } else {
+                    $imoveisFiltrados = $em->getRepository(Imovel::class)->findWithPrice($criterios, $min, $max);
                 }
 
-                $imoveisFiltrados = $em->getRepository(Imovel::class)->findBy($criterios);
                 
             } else {
                 
                 $imoveisFiltrados = $em->getRepository(Imovel::class)->findAll();
                 
             }
+
+            $total = count($imoveisFiltrados);
 
             $page = $request->query->getInt('page',1);
             $imoveisFiltrados = $paginator->paginate($imoveisFiltrados, $page, 5);
@@ -57,7 +75,8 @@ class BuscaImovelController extends AbstractController
 
         return $this->render('busca_imovel/index.html.twig', [
             'form' => $form->createView(),
-            'imoveis' => (isset($imoveisFiltrados) ? $imoveisFiltrados : NULL)
+            'imoveis' => (isset($imoveisFiltrados) ? $imoveisFiltrados : NULL),
+            'total' => $total
         ]);
     }
 
@@ -82,6 +101,14 @@ class BuscaImovelController extends AbstractController
 
         }
 
-
     }
+
+
+    /**
+     * https://stackoverflow.com/questions/10507789/camelcase-to-dash-two-capitals-next-to-each-other
+     */
+    function camel2dashed($className) {
+        return strtolower(preg_replace('/([a-zA-Z])(?=[A-Z])/', '$1_', $className));
+    }
+
 }

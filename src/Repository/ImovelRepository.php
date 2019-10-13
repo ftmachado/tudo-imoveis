@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Imovel;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * @method Imovel|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,22 +20,34 @@ class ImovelRepository extends ServiceEntityRepository
         parent::__construct($registry, Imovel::class);
     }
 
-    // /**
-    //  * @return Imovel[] Returns an array of Imovel objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Imovel[] Returns an array of Imovel objects
+     * Função para pesquisar com os critérios e range de preço
+     */
+    public function findWithPrice($criterios, $min = null, $max = null)
     {
+        $where = " ";
+        foreach ($criterios as $chave => $valor) {
+            $join = " AND ";
+            $where .= "i.".$chave." = '".$valor."'".$join;
+        }
+        
+        if ($min !== null) {
+            $where .= "i.valorImobiliaria >= '".$min."'".$join;
+        }
+        if ($max !== null) {
+            $where .= "i.valorImobiliaria <= '".$max."'".$join;
+        }
+        
+        $where = rtrim($where, " AND ");
+        
         return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere($where)
             ->getQuery()
             ->getResult()
         ;
+        
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Imovel
