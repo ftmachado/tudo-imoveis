@@ -39,3 +39,23 @@ ul .item-icones {
     color: black;
     font-weight: 600;
 }
+
+/* Footer */
+#footer{
+    height: 60px;
+}
+
+footer ul {
+    margin: 0;
+    padding: 0 0 0 10px;
+    display: inline-block;
+}
+footer ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 7px;
+    font-size: 14px;
+}
+footer .container p {
+    font-size: 14px;
+}

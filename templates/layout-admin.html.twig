@@ -14,7 +14,7 @@
         <link href="{{ asset('css/pace.css') }}" rel="stylesheet">
         <link href="{{ asset('css/themify-icons.css') }}" rel="stylesheet">
         <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet" />
-        {# <link href="{{ asset('css/all.css') }}" rel="stylesheet"> #}
+        <link href="{{ asset('css/busca.css') }}" rel="stylesheet">
         {% block extracss %}{% endblock %}
 
     </head>
@@ -237,8 +237,32 @@
                 <!-- FOOTER -->
                 <footer id="footer">
 
-                    <p class="pad-lft">© {{ "now" | date("Y") }} - Fhabiana Machado</p>
-
+                    <div class="container">
+                    
+                        <div class="row">
+                                <ul>
+                                    <li>
+                                        {% if imobiliaria is defined %}{{ imobiliaria.nomeFantasia }} -{% endif %} Todos os direitos reservados &#174;
+                                    </li>
+                                    <li>
+                                        <a href="#" target="_blank"><i class="ti-facebook"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://github.com/ftmachado" target="_blank"><i class="ti-github"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" target="_blank"><i class="ti-instagram"></i></a>
+                                    </li>
+                                </ul>
+                        </div>
+                        <div class="row">
+                            <ul>
+                                <li>
+                                    ©{{ "now" | date("Y") }} - Fhabiana Machado
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </footer>
                 <!-- END FOOTER -->
 

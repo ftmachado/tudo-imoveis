@@ -10,6 +10,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Knp\Component\Pager\PaginatorInterface;
+use Proxies\__CG__\App\Entity\Imobiliaria;
 
 class BuscaImovelController extends AbstractController
 {
@@ -22,6 +23,7 @@ class BuscaImovelController extends AbstractController
         $form = $this->createForm(BuscaImovelType::class, $imovel);
         
         $em = $this->getDoctrine()->getManager();
+        $imobiliaria = $em->getRepository(Imobiliaria::class)->findOneById(1);
 
         try{
 
@@ -76,6 +78,7 @@ class BuscaImovelController extends AbstractController
         return $this->render('busca_imovel/index.html.twig', [
             'form' => $form->createView(),
             'imoveis' => (isset($imoveisFiltrados) ? $imoveisFiltrados : NULL),
+            'imobiliaria' => $imobiliaria,
             'total' => $total
         ]);
     }
