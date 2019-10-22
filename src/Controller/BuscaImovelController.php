@@ -10,7 +10,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Knp\Component\Pager\PaginatorInterface;
-use Proxies\__CG__\App\Entity\Imobiliaria;
+use App\Entity\Imobiliaria;
 
 class BuscaImovelController extends AbstractController
 {
@@ -34,19 +34,33 @@ class BuscaImovelController extends AbstractController
                 $criterios = [];
                 $min = null;
                 $max = null;
-                foreach ($data['busca_imovel'] as $chave => $item) {
+
+                if ( isset($data['busca_imovel'])) {
+
+                    foreach ($data['busca_imovel'] as $chave => $item) {
                     
-                    if ($item != "" && !is_array($item)) {
-                        $criterios[$chave] = $item;
+                        if ($item != "" && !is_array($item)) {
+                            $criterios[$chave] = $item;
+                        }
+                        
+                        if (isset($item['first']) && $item['first'] != "") {
+                            $min = $item['first'];
+                        }
+                        if (isset($item['second']) && $item['second'] != "") {
+                            $max = $item['second'];
+                        }
+                        
                     }
+
+                } else if ( isset($data['inicio_imovel']) ) {
+
+                    foreach ($data['inicio_imovel'] as $chave => $item) {
                     
-                    if (isset($item['first']) && $item['first'] != "") {
-                        $min = $item['first'];
+                        if ($item != "" && !is_array($item)) {
+                            $criterios[$chave] = $item;
+                        }
                     }
-                    if (isset($item['second']) && $item['second'] != "") {
-                        $max = $item['second'];
-                    }
-                    
+
                 }
                 
                 if (!isset($min) && !isset($max)) {

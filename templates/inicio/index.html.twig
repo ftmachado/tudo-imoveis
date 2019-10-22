@@ -12,13 +12,16 @@
         <link href="{{ asset('css/nifty.css') }}" rel="stylesheet">
         <link href="{{ asset('css/themify-icons.css') }}" rel="stylesheet">
         <style>
-            .logo {
-                height: 64px;
-            }
             .principal {
                 padding: 30px;
                 background-image: url('images/fundo.jpg');
                 height: 300px;
+            }
+            .carousel-inner img {
+                margin: auto;
+            }
+            .phone {
+                font-weight: 600;
             }
         </style>
     </head>
@@ -27,7 +30,20 @@
         <div id="container">
             
             <header id="navbar">
-                <div id="navbar-container" class="boxed" style="height: 59px;"></div>
+                <div id="navbar-container" class="boxed">
+                    <!--Navbar Dropdown-->
+                    <div class="navbar-content">
+                        <ul class="nav navbar-top-links">
+
+                            <li id="user">
+                                <a href="{{ path('app_login') }}">
+                                    <i class="ti-lock icon-lg icon-fw"></i>
+                                    Acesso Restrito
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </header>
 
             <div
@@ -48,7 +64,7 @@
                                     <h1>Tudo Imóveis!</h1>
                                     <p>O imóvel dos seus sonhos está aqui.<br>Contamos com profissionais qualificados para te ajudar nesta importante escolha!</p>
                                     <br><br>
-                                    <form class="form-inline" method="POST">
+                                    <form class="form-inline" method="POST" action="{{ path('busca_imovel') }}">
                                         <div class="form-group">
                                             {{ form_widget(form.tipoAnuncio) }}
                                         </div>
@@ -61,7 +77,7 @@
                                         <button class="btn btn-primary" type="submit">Buscar</button>
                                     </form>
                                 </div>
-
+                                <br><br>
                                 <div class="destaques">
                                     <div
                                         class="panel">
@@ -71,7 +87,7 @@
 
                                             <!--Indicators-->
                                             <ol class="carousel-indicators out">
-                                                <li class="" data-slide-to="0" data-target="#demo-carousel"></li>
+                                                <li data-slide-to="0" data-target="#demo-carousel" class=""></li>
                                                 <li data-slide-to="1" data-target="#demo-carousel" class=""></li>
                                                 <li data-slide-to="2" data-target="#demo-carousel" class="active"></li>
                                             </ol>
@@ -79,27 +95,30 @@
                                             <div class="carousel-inner text-center">
 
                                                 <div class="item">
-                                                    <h4 class="text-main">First slide label</h4>
-                                                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                                    <h4 class="text-main">{{ destaques[0].titulo }}</h4>
+                                                    <p>Código do Imóvel {{ destaques[0].id }}<br>{{ destaques[0].descricao }}</p>
+                                                    <img class="d-block w-100" src="{{ asset(destaques[0].path) }}" alt="Primeiro imóvel">
                                                 </div>
 
                                                 <div class="item active left">
-                                                    <h4 class="text-main">Second slide label</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                    <h4 class="text-main">{{ destaques[1].titulo }}</h4>
+                                                    <p>Código do Imóvel {{ destaques[1].id }}<br>{{ destaques[1].descricao }}</p>
+                                                    <img class="d-block w-100" src="{{ asset(destaques[1].path) }}" alt="Segundo imóvel">
                                                 </div>
 
                                                 <div class="item next left">
-                                                    <h4 class="text-main">Third slide label</h4>
-                                                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                                    <h4 class="text-main">{{ destaques[2].titulo }}</h4>
+                                                    <p>Código do Imóvel {{ destaques[2].id }}<br>{{ destaques[2].descricao }}</p>
+                                                    <img class="d-block w-100" src="{{ asset(destaques[2].path) }}" alt="Terceiro imóvel">
                                                 </div>
                                             </div>
 
                                             <!--carousel-control-->
                                             <a class="carousel-control left" data-slide="prev" href="#demo-carousel">
-                                                <i class="demo-pli-arrow-left icon-2x"></i>
+                                                <i class="ti-angle-left icon-2x"></i>
                                             </a>
                                             <a class="carousel-control right" data-slide="next" href="#demo-carousel">
-                                                <i class="demo-pli-arrow-right icon-2x"></i>
+                                                <i class="ti-angle-right icon-2x"></i>
                                             </a>
 
                                         </div>
@@ -107,9 +126,27 @@
 
                                     </div>
                                 </div>
+                                <br><br>
 
-                                <div class="institucional">
-                                    <p>Aqui vai alguma publicidade institucional</p>
+                                <div class="institucional row">
+                                    <div class="col-sm-6">
+                                        <div class="panel">
+                                            <div class="panel-heading">
+                                                <h2 class="panel-title phone">Nós somos a {{ imobiliaria.nomeFantasia }}</h2>
+                                            </div>
+                                            <div class="panel-body">
+                                                <p>Uma empresa que surgiu a 5 anos comprometida com nossos clientes!</p>
+                                                <p>Atuando em cidadades da região central do Rio Grande do Sul, 
+                                                    nossos imóveis estão presentes na vida de muitos gaúchos!</p>
+                                                <p>Prezamos pelo bom atendimento e agilidade, tudo para você não ter dor de cabeça!</p>
+                                                <p>Entre em contato conosco pelo telefone:</p>
+                                                <span class="phone"><i class="ti-mobile icon-2x"></i>&nbsp;{{ imobiliaria.telefone }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/wuap54y-TCM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
                                 </div>
 
                             </div>

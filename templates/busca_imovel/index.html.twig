@@ -15,6 +15,20 @@
         <link href="{{ asset('css/all.css') }}" rel="stylesheet">
         <link href="{{ asset('css/busca.css') }}" rel="stylesheet">
 
+        <style>
+            .principal {
+                padding: 30px;
+                background-image: url('../images/fundoBusca.jpg');
+                height: 230px;
+            }
+            .carousel-inner img {
+                margin: auto;
+            }
+            .phone {
+                font-weight: 600;
+            }
+        </style>
+
     </head>
 
     <body class="pace-done">
@@ -22,7 +36,19 @@
         <div id="container">
 
             <header id="navbar">
-                <div id="navbar-container" class="boxed" style="height: 59px;"></div>
+                <div id="navbar-container" class="boxed">
+                    <div class="navbar-content">
+                        <ul class="nav navbar-top-links">
+
+                            <li id="user">
+                                <a href="{{ path('app_login') }}">
+                                    <i class="ti-lock icon-lg icon-fw"></i>
+                                    Acesso Restrito
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </header>
 
             <div
@@ -32,16 +58,29 @@
                 <div id="content-container">
 
                     <div id="page-head">
-                        
+                    
+                        <!--Page Title-->
+                        <div id="page-title">
+                            <h1 class="page-header text-overflow">Tudo Imóveis</h1>
+                        </div>
+
+                        <!--Breadcrumb-->
+                        <ol class="breadcrumb">
+                        <li><a href="{{ path('inicio') }}"><i class="ti-home"></i></a></li>
+                        <li class="active">Busca Imóveis</li>
+                        </ol>
+
                     </div>
 
                     <div id="page-content">
 
                         <div class="row">
-                            <div class="panel">
-
-                            </div>
+                            <div class="principal text-main text-center">
+                                    <h1>Tudo Imóveis!</h1>
+                                    <p>O imóvel dos seus sonhos está aqui.<br>Contamos com profissionais qualificados para te ajudar nesta importante escolha!</p>
+                                </div>
                         </div>
+                        <br>
 
                         <div class="row">
 
