@@ -165,7 +165,7 @@
                                         <div class="list-group">
 
                                             {% for imovel in imoveis %}
-                                                <a href="#" class="list-group-item">
+                                                <a href="{{ path('detalhe_imovel', {'id': imovel.id }) }}" class="list-group-item">
                                                 <div class="media">
                                                     <div class="media-left">
                                                         <img src="{{ asset( imovel.path ) }}" alt="" class="media-object">

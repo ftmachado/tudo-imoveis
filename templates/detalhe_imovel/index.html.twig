@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Tudo Imóveis</title>
+
+        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/nifty.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/themify-icons.css') }}" rel="stylesheet">
+         <style>
+            .principal {
+                padding: 30px;
+                background-image: url('../../../images/fundoBusca.jpg');
+                height: 150px;
+            }
+            .valores {
+                list-style: none;
+                padding: 5px 75px 6px 0;
+                margin-bottom: 5px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .valores li {
+                display: inline-block;
+                vertical-align: top;
+            }
+            .valores li b {
+                display: block;
+            }
+        </style>
+    </head>
+    <body class="pace-done">
+
+        <div id="container">
+            
+            <header id="navbar">
+                <div id="navbar-container" class="boxed">
+                    <!--Navbar Dropdown-->
+                    <div class="navbar-content">
+                        <ul class="nav navbar-top-links">
+
+                            <li id="user">
+                                <a href="{{ path('app_login') }}">
+                                    <i class="ti-lock icon-lg icon-fw"></i>
+                                    Acesso Restrito
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <div
+                class="boxed">
+
+                <!--CONTENT CONTAINER-->
+                <div id="content-container">
+
+                    <!--Page content-->
+                    <div id="page-content">
+
+                        <div class="panel">
+
+                            <div class="panel-body">
+
+                                <div class="principal text-main text-center">
+                                    <h1>Tudo Imóveis!</h1>
+                                    <p>O imóvel dos seus sonhos está aqui.<br>Contamos com profissionais qualificados para te ajudar nesta importante escolha!</p>
+                                </div>
+                                <br><br>
+
+                                <div class="fotos">
+                                    <div class="panel">
+
+                                        <!--Carousel-->
+                                        <div id="demo-carousel" class="carousel slide" data-ride="carousel">
+
+                                            <!--Indicators-->
+                                            <ol class="carousel-indicators out">
+                                                <li data-slide-to="0" data-target="#demo-carousel" class=""></li>
+                                                <li data-slide-to="1" data-target="#demo-carousel" class=""></li>
+                                                <li data-slide-to="2" data-target="#demo-carousel" class="active"></li>
+                                            </ol>
+
+                                            <div class="carousel-inner text-center">
+
+                                                <div class="item">
+                                                    <h4 class="text-main">Texto 1</h4>
+                                                </div>
+
+                                                <div class="item active left">
+                                                    <h4 class="text-main">Texto 2</h4>
+                                                </div>
+
+                                                <div class="item next left">
+                                                    <h4 class="text-main">Texto 3</h4>
+                                                </div>
+                                            </div>
+
+                                            <!--carousel-control-->
+                                            <a class="carousel-control left" data-slide="prev" href="#demo-carousel">
+                                                <i class="ti-angle-left icon-2x"></i>
+                                            </a>
+                                            <a class="carousel-control right" data-slide="next" href="#demo-carousel">
+                                                <i class="ti-angle-right icon-2x"></i>
+                                            </a>
+
+                                        </div>
+                                        <!--End Carousel-->
+
+                                    </div>
+                                </div>
+                                <br><br>
+
+                                <div class="preco row">
+                                    <div class="col-sm-6">
+                                        <div class="panel">
+                                            <div class="panel-body text-center">
+                                                <ul class="valores">
+                                                    <li>
+                                                        <b>Aluguel:</b>R$ {{ imovel.valorImobiliaria }}
+                                                    </li>
+                                                    <li>
+                                                        <b>Condomínio:</b>
+                                                        R$ {{ imovel.valorCondominio }}
+                                                    </li>
+                                                    <li>
+                                                        <b>IPTU: </b>
+                                                        R$ {{ imovel.valorIptu }}
+                                                    </li>
+                                                    <li>
+                                                        <b>Total:</b>
+                                                        R$ -
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="panel">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Endereço e detalhes</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <span><i class="ti-location-pin icon-4x"></i>
+                                                {{ imovel.endereco }}, {{ imovel.numero }}<br>
+                                                {{ imovel.fkBairroId.nome }}, {{ imovel.fkCidadeId.nome }}/{{ imovel.fkEstadoId.sigla }}
+                                                </span>
+                                                <h4>Sobre o imóvel:</h4>
+                                                {{ imovel.descricao }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="panel">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Contato</h3>
+                                            </div>
+                                            <div class="panel-body text-center">
+                                                <form class="form-horizontal">
+                                                    <div class="panel-body">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="nome">Nome</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" placeholder="Nome" id="nome" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="email">Email</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="email" placeholder="Email" id="email" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" for="telefone">Telefone</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" placeholder="Telefone" id="telefone" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-footer text-right">
+                                                        <button class="btn btn-success" type="submit">Enviar</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br><br>
+
+                                <div class="row">
+                                    Aqui vai a propaganda então
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--End page content-->
+                </div>
+
+
+                <!-- FOOTER -->
+                <footer id="footer">
+
+                    <p class="pad-lft">©
+                        {{ "now" | date("Y") }}
+                        - Fhabiana Machado</p>
+
+                </footer>
+                <!-- END FOOTER -->
+
+
+                <!-- SCROLL PAGE BUTTON -->
+                <button class="scroll-top btn">
+                    <i class="ti-angle-up"></i>
+                </button>
+                <div class="mainnav-backdrop"></div>
+            </div>
+            <!-- END OF CONTAINER -->
+
+
+            <!--JAVASCRIPT-->
+            <script src="{{ asset('js/jquery_002.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.js') }}"></script>
+            <script src="{{ asset('js/nifty.js') }}"></script>
+        </body>
+    </body>
+</html>
