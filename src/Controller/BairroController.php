@@ -68,16 +68,6 @@ class BairroController extends AbstractController
         ]);
     }
 
-    // /**
-    //  * @Route("/{id}", name="bairro_show", methods={"GET"})
-    //  */
-    // public function show(Bairro $bairro): Response
-    // {
-    //     return $this->render('bairro/show.html.twig', [
-    //         'bairro' => $bairro,
-    //     ]);
-    // }
-
     /**
      * @Route("/{id}/edit", name="bairro_edit", methods={"GET","POST"})
      */

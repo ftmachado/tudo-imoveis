@@ -11,11 +11,13 @@
         <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
         <link href="{{ asset('css/nifty.css') }}" rel="stylesheet">
         <link href="{{ asset('css/themify-icons.css') }}" rel="stylesheet">
-         <style>
+        <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+
+        <style>
             .principal {
                 padding: 30px;
                 background-image: url('../../../images/fundoBusca.jpg');
-                height: 150px;
+                height: 230px;
             }
             .valores {
                 list-style: none;
@@ -28,9 +30,42 @@
             .valores li {
                 display: inline-block;
                 vertical-align: top;
+                font-weight: 600;
             }
             .valores li b {
                 display: block;
+            }
+            .preco, .detalhes, .contato {
+                background-color: #ecf0f5;
+            }
+            .specialInfo {
+                padding: 10px 0;
+                flex-wrap: wrap;
+                display: block;
+                width: 100%;
+                margin: 0;
+                list-style: none;
+            }
+            .specialInfo li {
+                width: 49%;
+                padding: 10px 10px 10px 75px;
+                box-sizing: border-box;
+                display: inline-block;
+                vertical-align: middle;
+                position: relative;
+                align-items: center;
+                justify-content: center;
+            }
+            .specialInfo li p {
+                line-height: 16px;
+                padding: 9px 0;
+            }
+            .fa {
+                float: left;
+                padding: 8px;
+            }
+            .carousel-inner img {
+                margin: auto;
             }
         </style>
     </head>
@@ -60,7 +95,17 @@
 
                 <!--CONTENT CONTAINER-->
                 <div id="content-container">
+                
+                    <div id="page-head">
+                    
+                        <!--Breadcrumb-->
+                        <ol class="breadcrumb">
+                        <li><a href="{{ path('inicio') }}"><i class="ti-home"></i></a></li>
+                        <li><a href="{{ path('busca_imovel') }}">Busca Imóveis</a></li>
+                        <li class="active">Detalhes</li>
+                        </ol>
 
+                    </div>
                     <!--Page content-->
                     <div id="page-content">
 
@@ -74,32 +119,42 @@
                                 </div>
                                 <br><br>
 
+                                <div class="row">
+                                    <h4>{{ imovel.titulo }} <span class="label label-default">Código do Imóvel: {{ imovel.id }}</span></h4>
+                                </div>
+
                                 <div class="fotos">
                                     <div class="panel">
-
+                                        {% if imovel.files is null %}
+                                            <div class="row">
+                                                <div class="col-sm-12 text-center">
+                                                    <img src="{{ asset('images/sem_foto.png') }}">
+                                                </div>
+                                            </div>
+                                        {% elseif imovel.files | length == 1 %}
+                                            <div class="row">
+                                                <div class="col-sm-12 text-center">
+                                                    <img src="{{ imovel.files[0] }}">
+                                                </div>
+                                            </div>
+                                        {% else %}
                                         <!--Carousel-->
                                         <div id="demo-carousel" class="carousel slide" data-ride="carousel">
 
                                             <!--Indicators-->
                                             <ol class="carousel-indicators out">
-                                                <li data-slide-to="0" data-target="#demo-carousel" class=""></li>
-                                                <li data-slide-to="1" data-target="#demo-carousel" class=""></li>
-                                                <li data-slide-to="2" data-target="#demo-carousel" class="active"></li>
+                                                {% for key, file in imovel.files %}
+                                                    <li data-slide-to="{{ key }}" data-target="#demo-carousel" class="{% if key == 0 %}active{% endif %}"></li>
+                                                {% endfor %}
                                             </ol>
 
                                             <div class="carousel-inner text-center">
 
-                                                <div class="item">
-                                                    <h4 class="text-main">Texto 1</h4>
-                                                </div>
-
-                                                <div class="item active left">
-                                                    <h4 class="text-main">Texto 2</h4>
-                                                </div>
-
-                                                <div class="item next left">
-                                                    <h4 class="text-main">Texto 3</h4>
-                                                </div>
+                                                {% for key, file in imovel.files %}
+                                                    <div class="item {% if key == 1 %}active left{% elseif key > 1 %}next left{% endif %}">
+                                                        <img class="d-block w-100" src="{{ file }}">
+                                                    </div>
+                                                {% endfor %}
                                             </div>
 
                                             <!--carousel-control-->
@@ -112,18 +167,24 @@
 
                                         </div>
                                         <!--End Carousel-->
+                                        {% endif %}
 
                                     </div>
                                 </div>
                                 <br><br>
 
-                                <div class="preco row">
-                                    <div class="col-sm-6">
-                                        <div class="panel">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <div class="panel preco">
                                             <div class="panel-body text-center">
                                                 <ul class="valores">
                                                     <li>
-                                                        <b>Aluguel:</b>R$ {{ imovel.valorImobiliaria }}
+                                                        {% if imovel.tipoAnuncio == 'alugar' %}
+                                                            <b>Aluguel:</b>R$
+                                                            {% else %}
+                                                            <b>Valor do imóvel:</b>R$
+                                                        {% endif %}
+                                                        {{ imovel.valorImobiliaria }}
                                                     </li>
                                                     <li>
                                                         <b>Condomínio:</b>
@@ -135,31 +196,78 @@
                                                     </li>
                                                     <li>
                                                         <b>Total:</b>
-                                                        R$ -
+                                                        R$ {{ total }}
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="panel">
+                                        <div class="panel detalhes">
                                             <div class="panel-heading">
                                                 <h3 class="panel-title">Endereço e detalhes</h3>
                                             </div>
                                             <div class="panel-body">
-                                                <span><i class="ti-location-pin icon-4x"></i>
-                                                {{ imovel.endereco }}, {{ imovel.numero }}<br>
-                                                {{ imovel.fkBairroId.nome }}, {{ imovel.fkCidadeId.nome }}/{{ imovel.fkEstadoId.sigla }}
-                                                </span>
-                                                <h4>Sobre o imóvel:</h4>
-                                                {{ imovel.descricao }}
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <span><i class="ti-location-pin icon-4x"></i></span>
+                                                    </div>
+                                                    <div>
+                                                        {{ imovel.endereco }}, {{ imovel.numero }}<br>
+                                                        {{ imovel.fkBairroId.nome }}, {{ imovel.fkCidadeId.nome }}/{{ imovel.fkEstadoId.sigla }}<br>
+                                                        Complemento: {{ imovel.complemento }}
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                    <ul class="specialInfo">    
+                                                        <li>
+                                                            <span class="fa fa-bed fa-3x"></span>
+                                                            <p><b>Quartos</b><br>{{ imovel.quarto }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-shower fa-3x"></span>
+                                                            <p><b>Banheiro</b><br>{{ imovel.banheiro }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-ruler-combined fa-3x"></span>
+                                                            <p><b>Área total</b><br>{{ imovel.areaTotal }}m²</p>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-ruler fa-3x"></span>
+                                                            <p><b>Área útil</b><br>{{ imovel.areaUtil }}m²</p>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-compass fa-3x"></span>
+                                                            <p><b>Exposição Solar</b><br>{{ imovel.exposicaoSolar }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-expand fa-3x"></span>
+                                                            <p><b>Posição Prédio</b><br>{{ imovel.exposicaoSolar }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-car-alt fa-3x"></span>
+                                                            <p><b>Garagem</b><br>{{ imovel.garagem }}</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                {% if imovel.descricao is not null %}
+                                                <div class="row">
+                                                    <h5>Sobre o imóvel:</h5>
+                                                    {{ imovel.descricao }}
+                                                </div>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="panel">
+                                    <div class="col-sm-5">
+                                        <div class="panel contato">
                                             <div class="panel-heading">
                                                 <h3 class="panel-title">Contato</h3>
                                             </div>
                                             <div class="panel-body text-center">
+
+                                                <p>Fale com um corretor sem compromisso!
+                                                <br>Entramos em contato com você, preencha o formulário abaixo:</p>
+
                                                 <form class="form-horizontal">
                                                     <div class="panel-body">
                                                         <div class="form-group">
@@ -181,7 +289,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="panel-footer text-right">
+                                                    <div class="text-right">
                                                         <button class="btn btn-success" type="submit">Enviar</button>
                                                     </div>
                                                 </form>
@@ -191,8 +299,25 @@
                                 </div>
                                 <br><br>
 
-                                <div class="row">
-                                    Aqui vai a propaganda então
+                                <div class="institucional row">
+                                    <div class="col-sm-6">
+                                        <div class="panel">
+                                            <div class="panel-heading">
+                                                <h2 class="panel-title phone">Nós somos a {{ imobiliaria.nomeFantasia }}</h2>
+                                            </div>
+                                            <div class="panel-body">
+                                                <p>Uma empresa que surgiu a 5 anos comprometida com nossos clientes!</p>
+                                                <p>Atuando em cidadades da região central do Rio Grande do Sul, 
+                                                    nossos imóveis estão presentes na vida de muitos gaúchos!</p>
+                                                <p>Prezamos pelo bom atendimento e agilidade, tudo para você não ter dor de cabeça!</p>
+                                                <p>Entre em contato conosco pelo telefone:</p>
+                                                <span class="phone"><i class="ti-mobile icon-2x"></i>&nbsp;{{ imobiliaria.telefone }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/v1ocSHkHJyE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
                                 </div>
 
                             </div>
