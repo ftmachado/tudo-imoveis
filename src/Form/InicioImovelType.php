@@ -28,7 +28,8 @@ class InicioImovelType extends AbstractType
                 ],
                 'data' => 'alugar',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'aria-label' => 'Escolha entre alugar e comprar'
                 ]
             ])
 
@@ -38,6 +39,7 @@ class InicioImovelType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'class' => 'form-control',
+                    'aria-label' => 'Escolha o tipo de imóvel'
                 ]
             ])
 
@@ -51,7 +53,8 @@ class InicioImovelType extends AbstractType
                         ->orderBy('c.nome', 'ASC');
                 },
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'aria-label' => 'Escolha a cidade'
                 ]
             ])
         ;

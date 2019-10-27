@@ -30,9 +30,9 @@
         <div id="container">
             
             <header id="navbar">
-                <div id="navbar-container" class="boxed">
+                <div id="navbar-container" class="boxed" role="navigation">
                     <!--Navbar Dropdown-->
-                    <div class="navbar-content">
+                    <nav class="navbar-content">
                         <ul class="nav navbar-top-links">
 
                             <li id="user">
@@ -42,7 +42,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </nav>
                 </div>
             </header>
 
@@ -50,6 +50,7 @@
                 class="boxed">
 
                 <!--CONTENT CONTAINER-->
+                <main>
                 <div
                     id="content-container">
 
@@ -60,7 +61,7 @@
 
                             <div class="panel-body">
 
-                                <div class="principal text-main text-center">
+                                <div class="principal text-main text-center" aria-label="Buscar imóveis">
                                     <h1>Tudo Imóveis!</h1>
                                     <p>O imóvel dos seus sonhos está aqui.<br>Contamos com profissionais qualificados para te ajudar nesta importante escolha!</p>
                                     <br><br>
@@ -78,18 +79,18 @@
                                     </form>
                                 </div>
                                 <br><br>
-                                <div class="destaques">
+                                <div class="destaques" role="complementary" aria-label="Principais imóveis em destaque">
                                     <div
                                         class="panel">
 
                                         <!--Carousel-->
-                                        <div id="demo-carousel" class="carousel slide" data-ride="carousel">
+                                        <div id="demo-carousel" class="carousel slide" role="widget">
 
                                             <!--Indicators-->
                                             <ol class="carousel-indicators out">
-                                                <li data-slide-to="0" data-target="#demo-carousel" class=""></li>
+                                                <li data-slide-to="0" data-target="#demo-carousel" class="active"></li>
                                                 <li data-slide-to="1" data-target="#demo-carousel" class=""></li>
-                                                <li data-slide-to="2" data-target="#demo-carousel" class="active"></li>
+                                                <li data-slide-to="2" data-target="#demo-carousel" class=""></li>
                                             </ol>
 
                                             <div class="carousel-inner text-center">
@@ -97,27 +98,27 @@
                                                 <div class="item">
                                                     <h4 class="text-main">{{ destaques[0].titulo }}</h4>
                                                     <p>Código do Imóvel {{ destaques[0].id }}<br>{{ destaques[0].descricao }}</p>
-                                                    <img class="d-block w-100" src="{{ asset(destaques[0].path) }}" alt="Primeiro imóvel">
+                                                    <img class="" src="{{ asset(destaques[0].path) }}" alt="Primeiro imóvel destaque">
                                                 </div>
 
                                                 <div class="item active left">
                                                     <h4 class="text-main">{{ destaques[1].titulo }}</h4>
                                                     <p>Código do Imóvel {{ destaques[1].id }}<br>{{ destaques[1].descricao }}</p>
-                                                    <img class="d-block w-100" src="{{ asset(destaques[1].path) }}" alt="Segundo imóvel">
+                                                    <img class="" src="{{ asset(destaques[1].path) }}" alt="Segundo imóvel destaque">
                                                 </div>
 
                                                 <div class="item next left">
                                                     <h4 class="text-main">{{ destaques[2].titulo }}</h4>
                                                     <p>Código do Imóvel {{ destaques[2].id }}<br>{{ destaques[2].descricao }}</p>
-                                                    <img class="d-block w-100" src="{{ asset(destaques[2].path) }}" alt="Terceiro imóvel">
+                                                    <img class="" src="{{ asset(destaques[2].path) }}" alt="Terceiro imóvel destaque">
                                                 </div>
                                             </div>
 
                                             <!--carousel-control-->
-                                            <a class="carousel-control left" data-slide="prev" href="#demo-carousel">
+                                            <a class="carousel-control left" data-slide="prev" href="#demo-carousel" role="button" aria-label="Imagem anterior">
                                                 <i class="ti-angle-left icon-2x"></i>
                                             </a>
-                                            <a class="carousel-control right" data-slide="next" href="#demo-carousel">
+                                            <a class="carousel-control right" data-slide="next" href="#demo-carousel" role="button" aria-label="Próxima imagem">
                                                 <i class="ti-angle-right icon-2x"></i>
                                             </a>
 
@@ -128,7 +129,7 @@
                                 </div>
                                 <br><br>
 
-                                <div class="institucional row">
+                                <aside class="institucional row" aria-label="Sobre a imobiliária">
                                     <div class="col-sm-6">
                                         <div class="panel">
                                             <div class="panel-heading">
@@ -136,24 +137,28 @@
                                             </div>
                                             <div class="panel-body">
                                                 <p>Uma empresa que surgiu a 5 anos comprometida com nossos clientes!</p>
-                                                <p>Atuando em cidadades da região central do Rio Grande do Sul, 
+                                                <p>Atuando em cidades da região central do Rio Grande do Sul, 
                                                     nossos imóveis estão presentes na vida de muitos gaúchos!</p>
                                                 <p>Prezamos pelo bom atendimento e agilidade, tudo para você não ter dor de cabeça!</p>
                                                 <p>Entre em contato conosco pelo telefone:</p>
-                                                <span class="phone"><i class="ti-mobile icon-2x"></i>&nbsp;{{ imobiliaria.telefone }}</span>
+                                                <div class="row">
+                                                    <span class="phone col-sm-1" role="none"><i class="ti-mobile icon-2x"></i></span>
+                                                    <p>{{ imobiliaria.telefone }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
-                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/wuap54y-TCM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <iframe title="Vídeo dez dicas para comprar seu imóvel" width="560" height="315" src="https://www.youtube.com/embed/wuap54y-TCM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </div>
-                                </div>
+                                </aside>
 
                             </div>
                         </div>
                     </div>
                     <!--End page content-->
                 </div>
+                </main>
 
 
                 <!-- FOOTER -->
@@ -168,10 +173,9 @@
 
 
                 <!-- SCROLL PAGE BUTTON -->
-                <button class="scroll-top btn">
+                <button class="scroll-top btn" aria-label="Subir ao topo da página">
                     <i class="ti-angle-up"></i>
                 </button>
-                <div class="mainnav-backdrop"></div>
             </div>
             <!-- END OF CONTAINER -->
 

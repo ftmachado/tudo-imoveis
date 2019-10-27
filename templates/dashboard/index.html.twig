@@ -64,43 +64,6 @@
     </div>
 
     <div class="row">
-
-        <div class="panel col-md-6">
-            <div class="panel-heading">
-                <h3 class="panel-title">Total de vendas e locações por mês</h3>
-            </div>
-            <div class="panel-body">
-                <div id="demo-flot-bar" style="height: 250px; padding: 0px; position: relative;">
-                    <canvas class="flot-base" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 494.5px; height: 250px;" width="494" height="250"></canvas>
-                    <div class="flot-text" style="position: absolute; inset: 0px; font-size: smaller; color: rgb(84, 84, 84);">
-                        <div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; inset: 0px;">
-                            <div style="position: absolute; max-width: 44px; top: 235px; left: 15px; text-align: center;" class="flot-tick-label tickLabel">1</div>
-                            <div style="position: absolute; max-width: 44px; top: 235px; left: 64px; text-align: center;" class="flot-tick-label tickLabel">2</div>
-                            <div style="position: absolute; max-width: 44px; top: 235px; left: 113px; text-align: center;" class="flot-tick-label tickLabel">3</div>
-                            <div style="position: absolute; max-width: 44px; top: 235px; left: 161px; text-align: center;" class="flot-tick-label tickLabel">4</div>
-                            <div style="position: absolute; max-width: 44px; top: 235px; left: 210px; text-align: center;" class="flot-tick-label tickLabel">5</div>
-                            <div style="position: absolute; max-width: 44px; top: 235px; left: 259px; text-align: center;" class="flot-tick-label tickLabel">6</div>
-                            <div style="position: absolute; max-width: 44px; top: 235px; left: 308px; text-align: center;" class="flot-tick-label tickLabel">7</div>
-                            <div style="position: absolute; max-width: 44px; top: 235px; left: 357px; text-align: center;" class="flot-tick-label tickLabel">8</div>
-                            <div style="position: absolute; max-width: 44px; top: 235px; left: 405px; text-align: center;" class="flot-tick-label tickLabel">9</div>
-                            <div style="position: absolute; max-width: 44px; top: 235px; left: 451px; text-align: center;" class="flot-tick-label tickLabel">10</div>
-                        </div>
-                        <div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; inset: 0px;">
-                            <div style="position: absolute; top: 221px; left: 6px; text-align: right;" class="flot-tick-label tickLabel">0</div>
-                            <div style="position: absolute; top: 166px; left: 6px; text-align: right;" class="flot-tick-label tickLabel">5</div>
-                            <div style="position: absolute; top: 111px; left: 0px; text-align: right;" class="flot-tick-label tickLabel">10</div>
-                            <div style="position: absolute; top: 56px; left: 0px; text-align: right;" class="flot-tick-label tickLabel">15</div>
-                            <div style="position: absolute; top: 0px; left: 0px; text-align: right;" class="flot-tick-label tickLabel">20</div>
-                        </div>
-                    </div>
-                    <canvas class="flot-overlay" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 494.5px; height: 250px;" width="494" height="250"></canvas>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row">
         <div class="panel">
             <div class="panel-heading">
                 <h3 class="panel-title">Mapa</h3>
@@ -140,85 +103,6 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            // FLOT BAR CHART
-            // Require Flot Charts
-            // -----------------------------------------------------------------
-            // http://www.flotcharts.org/
-            // =================================================================
-            var data = [
-                [
-                    1, 10
-                ],
-                [
-                    2, 8
-                ],
-                [
-                    3, 4
-                ],
-                [
-                    4, 13
-                ],
-                [
-                    5, 17
-                ],
-                [
-                    6, 9
-                ],
-                [
-                    7, 12
-                ],
-                [
-                    8, 15
-                ],
-                [
-                    9, 9
-                ],
-                [
-                    10, 15
-                ]
-            ];
-
-            $.plot('#demo-flot-bar', [data], {
-                series: {
-                    bars: {
-                        show: true,
-                        barWidth: 0.6,
-                        fill: true,
-                        fillColor: {
-                            colors: [
-                                {
-                                    opacity: 0.9
-                                }, {
-                                    opacity: 0.9
-                                }
-                            ]
-                        }
-                    }
-                },
-                colors: ['#9B59B6'],
-                yaxis: {
-                    ticks: 5,
-                    tickColor: 'rgba(0,0,0,.1)'
-                },
-                xaxis: {
-                    ticks: 7,
-                    tickColor: 'transparent'
-                },
-                grid: {
-                    hoverable: true,
-                    clickable: true,
-                    tickColor: '#eeeeee',
-                    borderWidth: 0
-                },
-                legend: {
-                    show: true,
-                    position: 'nw'
-                },
-                tooltip: {
-                    show: true,
-                    content: 'x: %x, y: %y'
-                }
-            });
         });
     </script>
 {% endblock %}
